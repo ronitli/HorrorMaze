@@ -1,0 +1,7 @@
+Library
+Logs
+Temp
+Packages
+.vscode
+*.obj
+*build*
