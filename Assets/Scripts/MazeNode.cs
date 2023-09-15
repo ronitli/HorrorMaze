@@ -30,7 +30,7 @@ public class MazeNode : MonoBehaviour
                 floor.material.color = Color.yellow;
                 break;
             case NodeState.Completed:
-                floor.material.color = Color.blue;
+                floor.material.color = Color.green;
                 break;
         }
     }

@@ -7,11 +7,19 @@ public class MazeBuilder : MonoBehaviour
     [SerializeField] MazeNode nodePrefab;
     [SerializeField] Vector2Int mazeSize;
     [SerializeField] float nodeSize;
+    [SerializeField] GameObject playerPrefab;
 
     private void Start()
     {
         GenerateMazeInstant(mazeSize);
+        SpawnPlayer(mazeSize);
         //StartCoroutine(GenerateMaze(mazeSize));
+    }
+
+    void SpawnPlayer(Vector2Int size)
+    {
+        GameObject player = Instantiate(playerPrefab, new Vector3(0, 0.4f, 0), Quaternion.identity, transform);
+        player.SetActive(true);
     }
 
     void GenerateMazeInstant(Vector2Int size)
