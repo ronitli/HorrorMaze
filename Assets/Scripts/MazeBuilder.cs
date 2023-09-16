@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -19,13 +18,13 @@ public class MazeBuilder : MonoBehaviour
         //StartCoroutine(GenerateMaze(mazeSize));
     }
 
-    void SpawnPlayer(Vector2Int size)
+    private void SpawnPlayer(Vector2Int size)
     {
         var player = Instantiate(playerPrefab, new Vector3(0, 0.1f, 0), Quaternion.identity, transform);
         player.SetActive(true);
     }
 
-    void GenerateMazeInstant(Vector2Int size)
+    private void GenerateMazeInstant(Vector2Int size)
     {
         var doorSide = Random.Range(0, 3); // 0 for up, 1 down, 2 left, 3 right
         doorSide = 0;
@@ -56,16 +55,16 @@ public class MazeBuilder : MonoBehaviour
             yRotation = 0f;
         }
         
-        List<MazeNode> nodes = new List<MazeNode>();
+       var nodes = new List<MazeNode>();
         Debug.Log(doorPos + " side: " + doorSide);
         // Create nodes
         
-        for (int x = 0; x < size.x; x++)
+        for (var x = 0; x < size.x; x++)
         {
-            for (int y = 0; y < size.y; y++)
+            for (var y = 0; y < size.y; y++)
             {
                 MazeNode newNode;
-                Vector3 nodePos = new Vector3(x - (size.x / 2f), 0, y - (size.y / 2f));
+                var nodePos = new Vector3(x - (size.x / 2f), 0, y - (size.y / 2f));
                 if (x == doorPos.x && y == doorPos.y)
                 {
                     newNode = Instantiate(DoorNode, nodePos, Quaternion.identity, transform);
@@ -79,22 +78,21 @@ public class MazeBuilder : MonoBehaviour
             }
         }
 
-        List<MazeNode> currentPath = new List<MazeNode>();
-        List<MazeNode> completedNodes = new List<MazeNode>();
+        var currentPath = new List<MazeNode>();
+        var completedNodes = new List<MazeNode>();
 
         // Choose starting node
         currentPath.Add(nodes[Random.Range(0, nodes.Count)]);
-        currentPath[0].SetState(NodeState.Current);
 
         while (completedNodes.Count < nodes.Count)
         {
             // Check nodes next to the current node
-            List<int> possibleNextNodes = new List<int>();
-            List<int> possibleDirections = new List<int>();
+            var possibleNextNodes = new List<int>();
+            var possibleDirections = new List<int>();
 
-            int currentNodeIndex = nodes.IndexOf(currentPath[currentPath.Count - 1]);
-            int currentNodeX = currentNodeIndex / size.y;
-            int currentNodeY = currentNodeIndex % size.y;
+            var currentNodeIndex = nodes.IndexOf(currentPath[currentPath.Count - 1]);
+            var currentNodeX = currentNodeIndex / size.y;
+            var currentNodeY = currentNodeIndex % size.y;
 
             if (currentNodeX < size.x - 1)
             {
@@ -140,8 +138,8 @@ public class MazeBuilder : MonoBehaviour
             // Choose next node
             if (possibleDirections.Count > 0)
             {
-                int chosenDirection = Random.Range(0, possibleDirections.Count);
-                MazeNode chosenNode = nodes[possibleNextNodes[chosenDirection]];
+                var chosenDirection = Random.Range(0, possibleDirections.Count);
+                var chosenNode = nodes[possibleNextNodes[chosenDirection]];
 
                 switch (possibleDirections[chosenDirection])
                 {
@@ -164,13 +162,11 @@ public class MazeBuilder : MonoBehaviour
                 }
 
                 currentPath.Add(chosenNode);
-                chosenNode.SetState(NodeState.Current);
             }
             else
             {
                 completedNodes.Add(currentPath[currentPath.Count - 1]);
 
-                currentPath[currentPath.Count - 1].SetState(NodeState.Completed);
                 currentPath.RemoveAt(currentPath.Count - 1);
             }
         }
