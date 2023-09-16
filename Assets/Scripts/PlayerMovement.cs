@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PlayerMovementTutorial : MonoBehaviour
 {
-    public float moveSpeed = 5.0f;
+    public float moveSpeed = 1.0f;
     public float sensitivity = 2.0f;
     public float upDownRange = 90.0f;
 

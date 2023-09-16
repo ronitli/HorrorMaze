@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44658792, g: 0.49642283, b: 0.5748252, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -200,6 +200,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   nodePrefab: {fileID: 3911081967634144381, guid: 6384165b1cb5313e28bd8212e1cc0950, type: 3}
+  DoorNode: {fileID: 3911081967634144381, guid: 1bb267c0aaa1d3c4da86ad6052c5441d, type: 3}
   mazeSize: {x: 10, y: 10}
   nodeSize: 1
   playerPrefab: {fileID: 4514050537910336042, guid: 60e62abf2324afdf483f06342689dc31, type: 3}

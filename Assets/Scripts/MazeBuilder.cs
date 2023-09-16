@@ -5,9 +5,12 @@ using UnityEngine;
 public class MazeBuilder : MonoBehaviour
 {
     [SerializeField] MazeNode nodePrefab;
+    [SerializeField] MazeNode DoorNode;
     [SerializeField] Vector2Int mazeSize;
     [SerializeField] float nodeSize;
     [SerializeField] GameObject playerPrefab;
+
+    private bool createdDoor = false;
 
     private void Start()
     {
@@ -24,15 +27,54 @@ public class MazeBuilder : MonoBehaviour
 
     void GenerateMazeInstant(Vector2Int size)
     {
+        var doorSide = Random.Range(0, 3); // 0 for up, 1 down, 2 left, 3 right
+        doorSide = 0;
+        var doorPos = new Vector2Int();
+		var yRotation = 0f;
+        if (doorSide == 0)
+        {
+            var rnd = Random.Range(0, size.x - 1);
+            doorPos = new Vector2Int(0, rnd);
+            yRotation = 270f;
+        }
+        else if (doorSide == 1)
+        {
+            var rnd = Random.Range(0, size.x-1);
+            doorPos = new Vector2Int(size.y-1, rnd);
+            yRotation = 90f;
+        }
+        else if (doorSide == 2)
+        {
+            var rnd = Random.Range(0, size.y-1);
+            doorPos = new Vector2Int(rnd, 0);
+            yRotation = 180f;
+        }
+        else
+        {
+            var rnd = Random.Range(0, size.y-1);
+            doorPos = new Vector2Int(rnd, size.x-1);
+            yRotation = 0f;
+        }
+        
         List<MazeNode> nodes = new List<MazeNode>();
-
+        Debug.Log(doorPos + " side: " + doorSide);
         // Create nodes
+        
         for (int x = 0; x < size.x; x++)
         {
             for (int y = 0; y < size.y; y++)
             {
+                MazeNode newNode;
                 Vector3 nodePos = new Vector3(x - (size.x / 2f), 0, y - (size.y / 2f));
-                MazeNode newNode = Instantiate(nodePrefab, nodePos, Quaternion.identity, transform);
+                if (x == doorPos.x && y == doorPos.y)
+                {
+                    newNode = Instantiate(DoorNode, nodePos, Quaternion.identity, transform);
+                    newNode.transform.Rotate(0,yRotation,0,Space.Self);
+                }
+                else
+                {
+                    newNode = Instantiate(nodePrefab, nodePos, Quaternion.identity, transform);
+                }
                 nodes.Add(newNode);
             }
         }
