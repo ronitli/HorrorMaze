@@ -21,7 +21,7 @@ public class MazeBuilder : MonoBehaviour
 
     void SpawnPlayer(Vector2Int size)
     {
-        GameObject player = Instantiate(playerPrefab, new Vector3(0, 0.4f, 0), Quaternion.identity, transform);
+        var player = Instantiate(playerPrefab, new Vector3(0, 0.1f, 0), Quaternion.identity, transform);
         player.SetActive(true);
     }
 
