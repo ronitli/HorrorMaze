@@ -1,0 +1,275 @@
+{
+  "format": 1,
+  "restore": {
+    "/home/ronen/Documents/college/VR_development/HorrorMaze/Unity.EditorCoroutines.Editor.csproj": {}
+  },
+  "projects": {
+    "/home/ronen/Documents/college/VR_development/HorrorMaze/Unity.EditorCoroutines.Editor.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "/home/ronen/Documents/college/VR_development/HorrorMaze/Unity.EditorCoroutines.Editor.csproj",
+        "projectName": "Unity.EditorCoroutines.Editor",
+        "projectPath": "/home/ronen/Documents/college/VR_development/HorrorMaze/Unity.EditorCoroutines.Editor.csproj",
+        "packagesPath": "/home/ronen/.nuget/packages/",
+        "outputPath": "/home/ronen/Documents/college/VR_development/HorrorMaze/obj/",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "/home/ronen/.nuget/NuGet/NuGet.Config"
+        ],
+        "originalTargetFrameworks": [
+          "netstandard2.1"
+        ],
+        "sources": {
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "netstandard2.1": {
+            "targetAlias": "netstandard2.1",
+            "projectReferences": {
+              "/home/ronen/Documents/college/VR_development/HorrorMaze/UnityEditor.TestRunner.csproj": {
+                "projectPath": "/home/ronen/Documents/college/VR_development/HorrorMaze/UnityEditor.TestRunner.csproj"
+              },
+              "/home/ronen/Documents/college/VR_development/HorrorMaze/UnityEditor.UI.csproj": {
+                "projectPath": "/home/ronen/Documents/college/VR_development/HorrorMaze/UnityEditor.UI.csproj"
+              },
+              "/home/ronen/Documents/college/VR_development/HorrorMaze/UnityEngine.TestRunner.csproj": {
+                "projectPath": "/home/ronen/Documents/college/VR_development/HorrorMaze/UnityEngine.TestRunner.csproj"
+              },
+              "/home/ronen/Documents/college/VR_development/HorrorMaze/UnityEngine.UI.csproj": {
+                "projectPath": "/home/ronen/Documents/college/VR_development/HorrorMaze/UnityEngine.UI.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "netstandard2.1": {
+          "targetAlias": "netstandard2.1",
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "runtimeIdentifierGraphPath": "/usr/share/dotnet/sdk/7.0.111/RuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "/home/ronen/Documents/college/VR_development/HorrorMaze/UnityEditor.TestRunner.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "/home/ronen/Documents/college/VR_development/HorrorMaze/UnityEditor.TestRunner.csproj",
+        "projectName": "UnityEditor.TestRunner",
+        "projectPath": "/home/ronen/Documents/college/VR_development/HorrorMaze/UnityEditor.TestRunner.csproj",
+        "packagesPath": "/home/ronen/.nuget/packages/",
+        "outputPath": "/home/ronen/Documents/college/VR_development/HorrorMaze/obj/",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "/home/ronen/.nuget/NuGet/NuGet.Config"
+        ],
+        "originalTargetFrameworks": [
+          "netstandard2.1"
+        ],
+        "sources": {
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "netstandard2.1": {
+            "targetAlias": "netstandard2.1",
+            "projectReferences": {
+              "/home/ronen/Documents/college/VR_development/HorrorMaze/UnityEngine.TestRunner.csproj": {
+                "projectPath": "/home/ronen/Documents/college/VR_development/HorrorMaze/UnityEngine.TestRunner.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "netstandard2.1": {
+          "targetAlias": "netstandard2.1",
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "runtimeIdentifierGraphPath": "/usr/share/dotnet/sdk/7.0.111/RuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "/home/ronen/Documents/college/VR_development/HorrorMaze/UnityEditor.UI.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "/home/ronen/Documents/college/VR_development/HorrorMaze/UnityEditor.UI.csproj",
+        "projectName": "UnityEditor.UI",
+        "projectPath": "/home/ronen/Documents/college/VR_development/HorrorMaze/UnityEditor.UI.csproj",
+        "packagesPath": "/home/ronen/.nuget/packages/",
+        "outputPath": "/home/ronen/Documents/college/VR_development/HorrorMaze/obj/",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "/home/ronen/.nuget/NuGet/NuGet.Config"
+        ],
+        "originalTargetFrameworks": [
+          "netstandard2.1"
+        ],
+        "sources": {
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "netstandard2.1": {
+            "targetAlias": "netstandard2.1",
+            "projectReferences": {
+              "/home/ronen/Documents/college/VR_development/HorrorMaze/UnityEditor.TestRunner.csproj": {
+                "projectPath": "/home/ronen/Documents/college/VR_development/HorrorMaze/UnityEditor.TestRunner.csproj"
+              },
+              "/home/ronen/Documents/college/VR_development/HorrorMaze/UnityEngine.TestRunner.csproj": {
+                "projectPath": "/home/ronen/Documents/college/VR_development/HorrorMaze/UnityEngine.TestRunner.csproj"
+              },
+              "/home/ronen/Documents/college/VR_development/HorrorMaze/UnityEngine.UI.csproj": {
+                "projectPath": "/home/ronen/Documents/college/VR_development/HorrorMaze/UnityEngine.UI.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "netstandard2.1": {
+          "targetAlias": "netstandard2.1",
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "runtimeIdentifierGraphPath": "/usr/share/dotnet/sdk/7.0.111/RuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "/home/ronen/Documents/college/VR_development/HorrorMaze/UnityEngine.TestRunner.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "/home/ronen/Documents/college/VR_development/HorrorMaze/UnityEngine.TestRunner.csproj",
+        "projectName": "UnityEngine.TestRunner",
+        "projectPath": "/home/ronen/Documents/college/VR_development/HorrorMaze/UnityEngine.TestRunner.csproj",
+        "packagesPath": "/home/ronen/.nuget/packages/",
+        "outputPath": "/home/ronen/Documents/college/VR_development/HorrorMaze/obj/",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "/home/ronen/.nuget/NuGet/NuGet.Config"
+        ],
+        "originalTargetFrameworks": [
+          "netstandard2.1"
+        ],
+        "sources": {
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "netstandard2.1": {
+            "targetAlias": "netstandard2.1",
+            "projectReferences": {}
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "netstandard2.1": {
+          "targetAlias": "netstandard2.1",
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "runtimeIdentifierGraphPath": "/usr/share/dotnet/sdk/7.0.111/RuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "/home/ronen/Documents/college/VR_development/HorrorMaze/UnityEngine.UI.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "/home/ronen/Documents/college/VR_development/HorrorMaze/UnityEngine.UI.csproj",
+        "projectName": "UnityEngine.UI",
+        "projectPath": "/home/ronen/Documents/college/VR_development/HorrorMaze/UnityEngine.UI.csproj",
+        "packagesPath": "/home/ronen/.nuget/packages/",
+        "outputPath": "/home/ronen/Documents/college/VR_development/HorrorMaze/obj/",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "/home/ronen/.nuget/NuGet/NuGet.Config"
+        ],
+        "originalTargetFrameworks": [
+          "netstandard2.1"
+        ],
+        "sources": {
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "netstandard2.1": {
+            "targetAlias": "netstandard2.1",
+            "projectReferences": {}
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "netstandard2.1": {
+          "targetAlias": "netstandard2.1",
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "runtimeIdentifierGraphPath": "/usr/share/dotnet/sdk/7.0.111/RuntimeIdentifierGraph.json"
+        }
+      }
+    }
+  }
+}

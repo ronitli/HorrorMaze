@@ -9,8 +9,6 @@ public class MazeBuilder : MonoBehaviour
     [SerializeField] float nodeSize;
     [SerializeField] GameObject playerPrefab;
 
-    private bool createdDoor = false;
-
     private void Start()
     {
         GenerateMazeInstant(mazeSize);
@@ -26,36 +24,35 @@ public class MazeBuilder : MonoBehaviour
 
     private void GenerateMazeInstant(Vector2Int size)
     {
-        var doorSide = Random.Range(0, 3); // 0 for up, 1 down, 2 left, 3 right
-        doorSide = 0;
+        var doorSide = Random.Range(0, 4); // 0 for up, 1 down, 2 left, 3 right
         var doorPos = new Vector2Int();
 		var yRotation = 0f;
         if (doorSide == 0)
         {
-            var rnd = Random.Range(0, size.x - 1);
+            var rnd = Random.Range(0, size.x);
             doorPos = new Vector2Int(0, rnd);
             yRotation = 270f;
         }
         else if (doorSide == 1)
         {
-            var rnd = Random.Range(0, size.x-1);
+            var rnd = Random.Range(0, size.x);
             doorPos = new Vector2Int(size.y-1, rnd);
             yRotation = 90f;
         }
         else if (doorSide == 2)
         {
-            var rnd = Random.Range(0, size.y-1);
+            var rnd = Random.Range(0, size.y);
             doorPos = new Vector2Int(rnd, 0);
             yRotation = 180f;
         }
         else
         {
-            var rnd = Random.Range(0, size.y-1);
+            var rnd = Random.Range(0, size.y);
             doorPos = new Vector2Int(rnd, size.x-1);
             yRotation = 0f;
         }
         
-       var nodes = new List<MazeNode>();
+        var nodes = new List<MazeNode>();
         Debug.Log(doorPos + " side: " + doorSide);
         // Create nodes
         
@@ -68,7 +65,7 @@ public class MazeBuilder : MonoBehaviour
                 if (x == doorPos.x && y == doorPos.y)
                 {
                     newNode = Instantiate(DoorNode, nodePos, Quaternion.identity, transform);
-                    newNode.transform.Rotate(0,yRotation,0,Space.Self);
+                    newNode.GetComponent<MazeDoor>().RotateAndMoveWalls(yRotation);
                 }
                 else
                 {
