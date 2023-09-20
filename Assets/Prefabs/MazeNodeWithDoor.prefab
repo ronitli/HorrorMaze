@@ -25,7 +25,7 @@ Transform:
   m_GameObject: {fileID: 629100818659154348}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -0.002, z: -0.088}
+  m_LocalPosition: {x: 0, y: -0.002, z: -0.09}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -344,12 +344,17 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3911081967634144381, guid: 6384165b1cb5313e28bd8212e1cc0950, type: 3}
+      propertyPath: walls.Array.data[3]
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 5814587800234246788, guid: 6384165b1cb5313e28bd8212e1cc0950, type: 3}
       propertyPath: m_Name
       value: MazeNode
       objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects: []
+    m_RemovedGameObjects:
+    - {fileID: 8888818392198537231, guid: 6384165b1cb5313e28bd8212e1cc0950, type: 3}
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6384165b1cb5313e28bd8212e1cc0950, type: 3}
@@ -376,7 +381,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2277511486868635194, guid: 6384165b1cb5313e28bd8212e1cc0950, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0.025
+      value: 0.08
       objectReference: {fileID: 0}
     - target: {fileID: 2277511486868635194, guid: 6384165b1cb5313e28bd8212e1cc0950, type: 3}
       propertyPath: m_LocalRotation.w
