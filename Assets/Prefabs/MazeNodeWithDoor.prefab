@@ -252,7 +252,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2277511486868635194}
-  - component: {fileID: 3911081967634144381}
+  - component: {fileID: 5792317921751245961}
   m_Layer: 0
   m_Name: MazeNodeWithDoor
   m_TagString: Untagged
@@ -278,7 +278,7 @@ Transform:
   - {fileID: 4265090696323300398}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &3911081967634144381
+--- !u!114 &5792317921751245961
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -287,7 +287,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 5814587800234246788}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2f42b8ae3225bdbeeb64ce6afc92e71b, type: 3}
+  m_Script: {fileID: 11500000, guid: a3851dc196ad4a00789bf62eb7c8c2c4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   walls:
@@ -418,6 +418,18 @@ PrefabInstance:
     - target: {fileID: 5814587800234246788, guid: 6384165b1cb5313e28bd8212e1cc0950, type: 3}
       propertyPath: m_Name
       value: MazeNode (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 8685487831227061002, guid: 6384165b1cb5313e28bd8212e1cc0950, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8685487831227061002, guid: 6384165b1cb5313e28bd8212e1cc0950, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8685487831227061002, guid: 6384165b1cb5313e28bd8212e1cc0950, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects:
