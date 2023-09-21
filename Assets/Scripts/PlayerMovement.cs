@@ -10,7 +10,7 @@ public class PlayerMovementTutorial : MonoBehaviour
 
     private CharacterController characterController;
     private Camera playerCamera;
-    private float rotationX = 0;
+    private float rotationX;
 
     void Start()
     {

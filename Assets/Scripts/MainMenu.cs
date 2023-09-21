@@ -1,19 +1,29 @@
+using System;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
 public class MainMenu : MonoBehaviour
 {
+
+    public AudioSource music;
+
+    private void Start()
+    {
+        music.Play();
+        DontDestroyOnLoad(music);
+    }
+
     public void StartGame()
     {
         Debug.Log("StartGame function called");
-        SceneManager.LoadScene(1);//gameplay
+        SceneManager.LoadScene("Gameplay");//gameplay
     }
     
     public void ShowInstructions()
     {
         Debug.Log("ShowInstructions function called");
-        SceneManager.LoadScene(2);//instructions
+        SceneManager.LoadScene("Instructions");//instructions
     }
 
     public void QuitGame()
