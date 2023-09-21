@@ -23,23 +23,35 @@ public class PlayerMovementTutorial : MonoBehaviour
     void Update()
     {
         // Player movement
-        float horizontalInput = Input.GetAxis("Horizontal");
-        float verticalInput = Input.GetAxis("Vertical");
-        Vector3 moveDirection = transform.TransformDirection(new Vector3(horizontalInput, 0, verticalInput));
+        var horizontalInput = Input.GetAxis("Horizontal");
+        var verticalInput = Input.GetAxis("Vertical");
+        var moveDirection = transform.TransformDirection(new Vector3(horizontalInput, 0, verticalInput));
         characterController.Move(moveDirection * moveSpeed * Time.deltaTime);
 
         // Player rotation (left/right)
-        float mouseX = Input.GetAxis("Mouse X") * sensitivity;
-        Vector3 characterRotation = transform.localRotation.eulerAngles;
+        var mouseX = Input.GetAxis("Mouse X") * sensitivity;
+        var characterRotation = transform.localRotation.eulerAngles;
         characterRotation.y += mouseX;
         transform.localRotation = Quaternion.Euler(characterRotation);
 
         // Camera rotation (up/down)
-        float mouseY = Input.GetAxis("Mouse Y") * sensitivity;
+        var mouseY = Input.GetAxis("Mouse Y") * sensitivity;
         rotationX -= mouseY;
         rotationX = Mathf.Clamp(rotationX, -upDownRange, upDownRange);
-        Vector3 cameraRotation = playerCamera.transform.localRotation.eulerAngles;
+        var cameraRotation = playerCamera.transform.localRotation.eulerAngles;
         cameraRotation.x = rotationX;
         playerCamera.transform.localRotation = Quaternion.Euler(cameraRotation);
+    }
+    
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.tag == "WinArea")
+        {
+            Debug.Log("win");
+        }
+        else if (other.tag == "Enemy")
+        {
+            Debug.Log("GG");
+        }
     }
 }

@@ -1,5 +1,7 @@
 using System.Collections.Generic;
+using Unity.AI.Navigation;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class MazeBuilder : MonoBehaviour
 {
@@ -7,19 +9,33 @@ public class MazeBuilder : MonoBehaviour
     [SerializeField] MazeNode DoorNode;
     [SerializeField] Vector2Int mazeSize;
     [SerializeField] float nodeSize;
+    
     [SerializeField] GameObject playerPrefab;
+    [SerializeField] GameObject enemyPrefab;
 
+    private Vector3 spawnPoint;
+
+    public NavMeshSurface Surface;
     private void Start()
     {
         GenerateMazeInstant(mazeSize);
         SpawnPlayer(mazeSize);
+        SpawnEnemy(mazeSize);
+        Surface.BuildNavMesh();
+
         //StartCoroutine(GenerateMaze(mazeSize));
     }
 
     private void SpawnPlayer(Vector2Int size)
     {
-        var player = Instantiate(playerPrefab, new Vector3(0, 0.1f, 0), Quaternion.identity, transform);
+        var player = Instantiate(playerPrefab, spawnPoint + new Vector3(0,1f,0), Quaternion.identity, transform);
         player.SetActive(true);
+    }
+
+    private void SpawnEnemy(Vector2Int size)
+    {
+        var Enemy = Instantiate(enemyPrefab, new Vector3(0, 1, 0), Quaternion.identity, transform);
+        Enemy.SetActive(true);
     }
 
     private void GenerateMazeInstant(Vector2Int size)
@@ -62,7 +78,12 @@ public class MazeBuilder : MonoBehaviour
             for (var y = 0; y < size.y; y++)
             {
                 MazeNode newNode;
-                var nodePos = new Vector3(x - (size.x / 2f), 0, y - (size.y / 2f));
+                var cellSize = 10.0f; // Adjust the cell size as needed (e.g., 2.0f for larger cells).
+                var nodePos = new Vector3(x * cellSize - ((size.x - 1) * cellSize / 2f), 0, y * cellSize - ((size.y - 1) * cellSize / 2f));
+                if (x == (int)size.x / 2 && y == (int)size.y / 2)
+                {
+                    spawnPoint = nodePos;
+                }
                 if (x == doorPos.x && y == doorPos.y)
                 {
                     newNode = Instantiate(DoorNode, nodePos, Quaternion.identity, transform);
@@ -73,6 +94,7 @@ public class MazeBuilder : MonoBehaviour
                     newNode = Instantiate(nodePrefab, nodePos, Quaternion.identity, transform);
                 }
                 nodes.Add(newNode);
+                
             }
         }
 
