@@ -13,7 +13,8 @@ public class MazeBuilder : MonoBehaviour
     [SerializeField] GameObject playerPrefab;
     [SerializeField] GameObject enemyPrefab;
 
-    private Vector3 spawnPoint;
+    private Vector3 playerSpawnPoint;
+    private Vector3 enemySpawnPoint;
 
     public NavMeshSurface Surface;
     private void Start()
@@ -28,13 +29,13 @@ public class MazeBuilder : MonoBehaviour
 
     private void SpawnPlayer(Vector2Int size)
     {
-        var player = Instantiate(playerPrefab, spawnPoint + new Vector3(0,1f,0), Quaternion.identity, transform);
+        var player = Instantiate(playerPrefab, playerSpawnPoint + new Vector3(0,1f,0), Quaternion.identity, transform);
         player.SetActive(true);
     }
 
     private void SpawnEnemy(Vector2Int size)
     {
-        var Enemy = Instantiate(enemyPrefab, new Vector3(0, 1, 0), Quaternion.identity, transform);
+        var Enemy = Instantiate(enemyPrefab, enemySpawnPoint + new Vector3(0,1f,0), Quaternion.identity, transform);
         Enemy.SetActive(true);
     }
 
@@ -82,7 +83,12 @@ public class MazeBuilder : MonoBehaviour
                 var nodePos = new Vector3(x * cellSize - ((size.x - 1) * cellSize / 2f), 0, y * cellSize - ((size.y - 1) * cellSize / 2f));
                 if (x == (int)size.x / 2 && y == (int)size.y / 2)
                 {
-                    spawnPoint = nodePos;
+                    playerSpawnPoint = nodePos;
+                }
+                
+                else if (x == 0 && y == 0)
+                {
+                    enemySpawnPoint = nodePos;
                 }
                 if (x == doorPos.x && y == doorPos.y)
                 {
