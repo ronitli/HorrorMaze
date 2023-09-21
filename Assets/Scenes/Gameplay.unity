@@ -200,10 +200,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   nodePrefab: {fileID: 3911081967634144381, guid: 6384165b1cb5313e28bd8212e1cc0950, type: 3}
-
-  DoorNode: {fileID: 3911081967634144381, guid: 1bb267c0aaa1d3c4da86ad6052c5441d, type: 3}
+  DoorNode: {fileID: 5792317921751245961, guid: 1bb267c0aaa1d3c4da86ad6052c5441d, type: 3}
   mazeSize: {x: 2, y: 2}
-
   nodeSize: 1
   playerPrefab: {fileID: 4514050537910336042, guid: 60e62abf2324afdf483f06342689dc31, type: 3}
 --- !u!1660057539 &9223372036854775807
