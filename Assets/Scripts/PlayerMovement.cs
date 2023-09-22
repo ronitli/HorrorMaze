@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -11,6 +12,12 @@ public class PlayerMovementTutorial : MonoBehaviour
     private CharacterController characterController;
     private Camera playerCamera;
     private float rotationX;
+    private AudioSource steps;
+
+    private void Awake()
+    {
+        steps = GetComponent<AudioSource>();
+    }
 
     void Start()
     {
@@ -25,6 +32,15 @@ public class PlayerMovementTutorial : MonoBehaviour
         // Player movement
         var horizontalInput = Input.GetAxis("Horizontal");
         var verticalInput = Input.GetAxis("Vertical");
+
+        if (horizontalInput != 0 || verticalInput != 0)
+        {
+            steps.enabled = true;
+        }
+        else
+        {
+            steps.enabled = false;
+        }
         var moveDirection = transform.TransformDirection(new Vector3(horizontalInput, 0, verticalInput));
         characterController.Move(moveDirection * moveSpeed * Time.deltaTime);
 

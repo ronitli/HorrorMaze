@@ -30,6 +30,15 @@ public class Enemy : MonoBehaviour
     public EnemyState DefaultState = EnemyState.Idle;
     private EnemyState _state;
 
+
+    [SerializeField] private float footstepDistance = 100f;
+    private AudioSource steps;
+    public float maxVolume = 1f; // Maximum volume when close to the player.
+    public float minVolume = 0.1f; // Minimum volume when far from the player.
+    public float maxDistance = 100f; // Maximum distance at which footsteps are heard.
+    public float intensityFactor = 5f;
+    
+
     private Coroutine followCoroutine;
     public EnemyState State
     {
@@ -49,13 +58,42 @@ public class Enemy : MonoBehaviour
     public StateChangeEvent onStateChange;
     void Awake()
     {
+        steps = GetComponent<AudioSource>();
         enemy = GetComponent<NavMeshAgent>();
+        
         playerTarget = GameObject.FindGameObjectWithTag("Player");
 
         onStateChange += HandleStateChange;
 
         LineOfSightChecker.OnGainSight += HandleGainSight;
         LineOfSightChecker.OnLoseSight += HandleLoseSight;
+    }
+
+    private void Update()
+    {
+        var distanceToPlayer = Vector3.Distance(transform.position, playerTarget.transform.position);
+
+        if (distanceToPlayer == 0)
+            distanceToPlayer += 0.01f;
+        
+        var intensity = 1 - distanceToPlayer/maxDistance;
+
+        // Calculate the volume based on intensity.
+        var volume = Mathf.Lerp(minVolume, maxVolume, intensity);
+
+
+        // Set the volume.
+        steps.volume = volume;
+
+        // Check if the enemy is close enough to the player to play footsteps.
+        if (distanceToPlayer <= footstepDistance)
+        {
+            steps.enabled = true;
+        }
+        else
+        {
+            steps.enabled = false;
+        }
     }
 
     private void HandleGainSight(GameObject player)
