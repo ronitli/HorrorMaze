@@ -2,7 +2,6 @@ using System.Collections.Generic;
 using Unity.AI.Navigation;
 using UnityEngine;
 using UnityEngine.AI;
-
 public class MazeBuilder : MonoBehaviour
 {
     [SerializeField] MazeNode nodePrefab;
@@ -14,15 +13,20 @@ public class MazeBuilder : MonoBehaviour
     [SerializeField] GameObject enemyPrefab;
 
     private Vector3 playerSpawnPoint;
-    private Vector3 enemySpawnPoint;
+    private Vector3[] enemySpawnPoint = new Vector3[2];
+    private NavMeshTriangulation Triangulation;
+
+    private int enemyCounter = 2;
 
     public NavMeshSurface Surface;
     private void Start()
     {
         GenerateMazeInstant(mazeSize);
+        Surface.BuildNavMesh();
+        Triangulation = NavMesh.CalculateTriangulation();
         SpawnPlayer(mazeSize);
         SpawnEnemy(mazeSize);
-        Surface.BuildNavMesh();
+        
 
         //StartCoroutine(GenerateMaze(mazeSize));
     }
@@ -35,8 +39,14 @@ public class MazeBuilder : MonoBehaviour
 
     private void SpawnEnemy(Vector2Int size)
     {
-        var Enemy = Instantiate(enemyPrefab, enemySpawnPoint + new Vector3(0,1f,0), Quaternion.identity, transform);
-        Enemy.SetActive(true);
+        for (int i = 0; i < enemyCounter; i++)
+        {
+            var Enemy = Instantiate(enemyPrefab, enemySpawnPoint[i] + new Vector3(0,1f,0), Quaternion.identity, transform);
+            Enemy.SetActive(true);
+            var enemy = Enemy.GetComponent<Enemy>();
+            enemy.Triangulation = Triangulation;
+            enemy.Spawn();
+        }
     }
 
     private void GenerateMazeInstant(Vector2Int size)
@@ -81,14 +91,18 @@ public class MazeBuilder : MonoBehaviour
                 MazeNode newNode;
                 var cellSize = 10.0f; // Adjust the cell size as needed (e.g., 2.0f for larger cells).
                 var nodePos = new Vector3(x * cellSize - ((size.x - 1) * cellSize / 2f), 0, y * cellSize - ((size.y - 1) * cellSize / 2f));
-                if (x == (int)size.x / 2 && y == (int)size.y / 2)
+                if (x == size.x / 2 && y == size.y / 2)
                 {
                     playerSpawnPoint = nodePos;
                 }
                 
-                else if (x == 0 && y == 0)
+                else if (x == size.x / 2 + 2 && y == size.y / 2 - 2)
                 {
-                    enemySpawnPoint = nodePos;
+                    enemySpawnPoint[0] = nodePos;
+                }
+                else if (x == size.x / 2 - 2 && y == size.y / 2 + 2)
+                {
+                    enemySpawnPoint[1] = nodePos;
                 }
                 if (x == doorPos.x && y == doorPos.y)
                 {

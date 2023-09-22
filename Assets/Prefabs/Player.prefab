@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8241918949187968878}
   - component: {fileID: 784100223190793030}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Flashlight sound
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -139,7 +139,7 @@ GameObject:
   - component: {fileID: 8932726823661514139}
   - component: {fileID: 7345484532215643986}
   - component: {fileID: 6141947323793040837}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: MainCamera
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -236,7 +236,7 @@ GameObject:
   - component: {fileID: 6644683704613095312}
   - component: {fileID: 6805127192001046549}
   - component: {fileID: 4259483501950238230}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Player
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -412,7 +412,7 @@ GameObject:
   - component: {fileID: 3924014726030241975}
   - component: {fileID: 533819592315367116}
   - component: {fileID: 8391292662620486425}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Flashlight
   m_TagString: Untagged
   m_Icon: {fileID: 0}
