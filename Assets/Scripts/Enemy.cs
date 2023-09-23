@@ -30,14 +30,16 @@ public class Enemy : MonoBehaviour
     public EnemyState DefaultState = EnemyState.Idle;
     private EnemyState _state;
 
+    private bool screamed = false;
 
-    [SerializeField] private float footstepDistance = 100f;
+
+    [SerializeField] private float footstepDistance = 50f;
     private AudioSource steps;
     public float maxVolume = 1f; // Maximum volume when close to the player.
     public float minVolume = 0.1f; // Minimum volume when far from the player.
-    public float maxDistance = 100f; // Maximum distance at which footsteps are heard.
-    public float intensityFactor = 5f;
-    
+    public float maxDistance = 50f; // Maximum distance at which footsteps are heard.
+
+    public AudioSource AttackScream;
 
     private Coroutine followCoroutine;
     public EnemyState State
@@ -185,6 +187,7 @@ public class Enemy : MonoBehaviour
             switch (newState)
             {
                 case EnemyState.Idle:
+                    screamed = false;
                     followCoroutine = StartCoroutine(DoIdleMotion());
                     break;
                 case EnemyState.Chase:
@@ -231,6 +234,13 @@ public class Enemy : MonoBehaviour
             if (enemy.enabled)
             {
                 enemy.SetDestination(playerTarget.transform.position);
+
+                if (!screamed)
+                {
+                    AttackScream.Play();
+
+                    screamed = true;
+                }
             }
 
             yield return wait;

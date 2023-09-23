@@ -6,7 +6,7 @@ using UnityEngine;
 public class EnemyLineOfSightChecker : MonoBehaviour
 {
     public SphereCollider Collider;
-    public float FieldOfView = 90f;
+    public float FieldOfView = 180f;
     public LayerMask LineOfSightLayers;
     
     public delegate void GainSightEvent(GameObject player);
@@ -41,6 +41,7 @@ public class EnemyLineOfSightChecker : MonoBehaviour
         {
             player = other.gameObject;
             OnLoseSight?.Invoke(player);
+            gameObject.GetComponent<SphereCollider>().radius = 5;
             if (checkForLineOfSightCoroutine != null)
             {
                 StopCoroutine(checkForLineOfSightCoroutine);
@@ -50,21 +51,15 @@ public class EnemyLineOfSightChecker : MonoBehaviour
 
     private bool CheckLineOfSight(GameObject player)
     {
-        var direction = (player.transform.position - transform.position).normalized;
+        var direction = player.transform.position - transform.position;
 
         if (Vector3.Dot(transform.forward, direction) >= Mathf.Cos(FieldOfView))
         {
-            RaycastHit hit;
-
-            if (Physics.Raycast(transform.position, direction, out hit, Collider.radius, LineOfSightLayers))
-            {
-                if (hit.transform.tag == "Player")
-                {
-                    OnGainSight?.Invoke(player);
-                    return true;
-                }
-            }
+            OnGainSight?.Invoke(player);
+            gameObject.GetComponent<SphereCollider>().radius = 8;
+            return true;
         }
+        
 
         return false;
     }

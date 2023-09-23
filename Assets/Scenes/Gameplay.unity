@@ -374,7 +374,7 @@ MonoBehaviour:
   mazeSize: {x: 10, y: 10}
   nodeSize: 1
   playerPrefab: {fileID: 4514050537910336042, guid: 60e62abf2324afdf483f06342689dc31, type: 3}
-  enemyPrefab: {fileID: 4514050537910336042, guid: 4b228fc18129e1044b004ced6c727d05, type: 3}
+  enemyPrefab: {fileID: 3969451666641369782, guid: 0fdb1355e1101c749ad02eba859fc470, type: 3}
   Surface: {fileID: 893159677}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:

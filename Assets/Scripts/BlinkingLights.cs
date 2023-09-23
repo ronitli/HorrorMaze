@@ -1,5 +1,7 @@
+using System;
 using System.Collections;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class BlinkingLights : MonoBehaviour
 {
@@ -17,10 +19,17 @@ public class BlinkingLights : MonoBehaviour
 
     private float timer;
 
+    private MeshRenderer mat;
+
+    private void Awake()
+    {
+        mat = gameObject.GetComponent<MeshRenderer>();
+    }
+
     private void Start()
     {
         enemies = GameObject.FindGameObjectsWithTag("Enemy");
-        timer = Random.Range(0.1f, 0.8f);
+        timer = Random.Range(0.1f, 0.4f);
     }
 
     // Update is called once per frame
@@ -29,7 +38,7 @@ public class BlinkingLights : MonoBehaviour
         foreach (var enemy in enemies)
         {
             var distanceToPlayer = Vector3.Distance(transform.position, enemy.transform.position);
-
+            
             // Check if the player is within the trigger zone and the lights are not already blinking.
             if (distanceToPlayer <= maxDistance)
             {
@@ -40,9 +49,14 @@ public class BlinkingLights : MonoBehaviour
                 else if (timer <= 0)
                 {
                     Light.enabled = !Light.enabled;
-                    gameObject.GetComponent<MeshRenderer>().material = Light.enabled ? On : Off;
-                    timer = Random.Range(0.1f, 0.8f);
+                    mat.material = Light.enabled ? On : Off;
+                    timer = Random.Range(0.1f, 0.4f);
                 }
+            }
+            else
+            {
+                Light.enabled = true;
+                mat.material = On;
             }
         }
     }
