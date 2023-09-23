@@ -16,7 +16,7 @@ public class MazeBuilder : MonoBehaviour
     private Vector3[] enemySpawnPoint = new Vector3[2];
     private NavMeshTriangulation Triangulation;
 
-    private int enemyCounter = 2;
+    public int enemyCounter = 2;
 
     public NavMeshSurface Surface;
     private void Start()
@@ -39,7 +39,7 @@ public class MazeBuilder : MonoBehaviour
 
     private void SpawnEnemy(Vector2Int size)
     {
-        for (int i = 0; i < enemyCounter; i++)
+        for (var i = 0; i < enemyCounter; i++)
         {
             var Enemy = Instantiate(enemyPrefab, enemySpawnPoint[i] + new Vector3(0,1f,0), Quaternion.identity, transform);
             Enemy.SetActive(true);
