@@ -159,7 +159,7 @@ Transform:
   m_GameObject: {fileID: 823581665449406724}
   serializedVersion: 2
   m_LocalRotation: {x: 0.7071068, y: -0, z: -0, w: 0.7071068}
-  m_LocalPosition: {x: -0.79, y: -1.46, z: 1.05}
+  m_LocalPosition: {x: -0.13, y: -1.02, z: -0.07}
   m_LocalScale: {x: 43.971474, y: 32.404575, z: 44.892365}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -177,9 +177,9 @@ Light:
   m_Type: 2
   m_Shape: 0
   m_Color: {r: 0.5849056, g: 0.5849056, b: 0.5849056, a: 1}
-  m_Intensity: 5
-  m_Range: 1
-  m_SpotAngle: 47.8
+  m_Intensity: 3
+  m_Range: 5.6
+  m_SpotAngle: 81.9
   m_InnerSpotAngle: 21.80208
   m_CookieSize: 10
   m_Shadows:
@@ -218,7 +218,7 @@ Light:
   m_RenderingLayerMask: 1
   m_Lightmapping: 2
   m_LightShadowCasterMode: 0
-  m_AreaSize: {x: 1, y: 1}
+  m_AreaSize: {x: 2.05, y: 1}
   m_BounceIntensity: 1
   m_ColorTemperature: 6570
   m_UseColorTemperature: 0
@@ -795,6 +795,7 @@ GameObject:
   - component: {fileID: 418750690363538484}
   - component: {fileID: 770575337147767747}
   - component: {fileID: 4860840659919738965}
+  - component: {fileID: 4886349180264141192}
   m_Layer: 0
   m_Name: lightbulb
   m_TagString: Untagged
@@ -891,6 +892,23 @@ CapsuleCollider:
   m_Height: 2
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &4886349180264141192
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7706596318346344533}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 21fa7e172d9205e4981e2c4d2e844a1d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxDistance: 25
+  blinkInterval: 0.5
+  Light: {fileID: 1304832276317756316}
+  On: {fileID: 2100000, guid: 655005cfac1ae0041bd7abdd8fcf4d1e, type: 2}
+  Off: {fileID: 2100000, guid: f792b67aad0d8d1479e1a98813480a22, type: 2}
 --- !u!1 &8268426488248496948
 GameObject:
   m_ObjectHideFlags: 0
