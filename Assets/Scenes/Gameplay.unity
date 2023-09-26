@@ -374,7 +374,7 @@ MonoBehaviour:
   portalPrefab: {fileID: 7064811865259558138, guid: 3efac0332d5a3c71abec23b5a6c6141b, type: 3}
   mazeSize: {x: 10, y: 10}
   nodeSize: 1
-  debug: 1
+  debug: 0
   playerPrefab: {fileID: 4514050537910336042, guid: 60e62abf2324afdf483f06342689dc31, type: 3}
   enemyPrefab: {fileID: 3969451666641369782, guid: 0fdb1355e1101c749ad02eba859fc470, type: 3}
   enemyCounter: 2

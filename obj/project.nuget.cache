@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "3jRzFRwicu9BX8zoxJZv1LUg8nwjZsBik65vMHfw7qpbCoSbZFbma6OTqs5YqS/DNYjxFa1LuILOfiStTIaPxg==",
+  "dgSpecHash": "3dpPSIgwiGXHyIaXQNsnOLkQ9t0e4bTdWouOQct/wC8kt6J8ut96sl1h2/UT7k/7/53EmLd/EoVtdBWHYjxVgg==",
   "success": true,
-  "projectFilePath": "/home/ronen/Documents/college/VR_development/HorrorMaze/Unity.VisualScripting.Core.Editor.csproj",
+  "projectFilePath": "/home/ronen/Documents/college/VR_development/HorrorMaze/Unity.TextMeshPro.Editor.csproj",
   "expectedPackageFiles": [],
   "logs": []
 }
