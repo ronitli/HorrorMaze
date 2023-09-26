@@ -51,7 +51,7 @@ public class MazeBuilder : MonoBehaviour
 
     private void GenerateMazeInstant(Vector2Int size)
     {
-        var doorSide = Random.Range(0, 4); // 0 for up, 1 down, 2 left, 3 right
+        var doorSide = 3; //Random.Range(0, 4); // 0 for up, 1 down, 2 left, 3 right
 
         var doorPos = new Vector2Int();
 		var yRotation = 0f;

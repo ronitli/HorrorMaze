@@ -11,7 +11,7 @@
     <RootNamespace></RootNamespace>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <AssemblyName>Unity.SysrootPackage.Editor</AssemblyName>
+    <AssemblyName>Unity.AI.Navigation.Updater</AssemblyName>
     <TargetFramework>netstandard2.1</TargetFramework>
     <BaseDirectory>.</BaseDirectory>
   </PropertyGroup>
@@ -45,7 +45,7 @@
   <PropertyGroup>
     <UnityProjectGenerator>Package</UnityProjectGenerator>
     <UnityProjectGeneratorVersion>2.0.21</UnityProjectGeneratorVersion>
-    <UnityProjectType>Editor:5</UnityProjectType>
+    <UnityProjectType>Game:1</UnityProjectType>
     <UnityBuildTarget>StandaloneLinux64:24</UnityBuildTarget>
     <UnityVersion>2022.3.8f1</UnityVersion>
   </PropertyGroup>
@@ -55,12 +55,14 @@
     <Analyzer Include="/home/ronen/Unity/Hub/Editor/2022.3.8f1/Editor/Data/Tools/Unity.SourceGenerators/Unity.Properties.SourceGenerator.dll" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Library/PackageCache/com.unity.sysroot@2.0.7/Editor/NiceIO.cs" />
-    <Compile Include="Library/PackageCache/com.unity.sysroot@2.0.7/Editor/Unity.SysrootPackage.cs" />
-    <Compile Include="Library/PackageCache/com.unity.sysroot@2.0.7/Editor/AssemblyInfo.cs" />
+    <Compile Include="Library/PackageCache/com.unity.ai.navigation@1.1.4/Editor/Updater/NavMeshSceneConverter.cs" />
+    <Compile Include="Library/PackageCache/com.unity.ai.navigation@1.1.4/Editor/Updater/BuiltInToNavMeshSurfaceConverterContainer.cs" />
+    <Compile Include="Library/PackageCache/com.unity.ai.navigation@1.1.4/Editor/Updater/AssemblyInfo.cs" />
+    <Compile Include="Library/PackageCache/com.unity.ai.navigation@1.1.4/Editor/Updater/NavMeshUpdaterEditor.cs" />
+    <Compile Include="Library/PackageCache/com.unity.ai.navigation@1.1.4/Editor/Updater/NavMeshUpdaterUtility.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Library/PackageCache/com.unity.sysroot@2.0.7/Editor/Unity.SysrootPackage.Editor.asmdef" />
+    <None Include="Library/PackageCache/com.unity.ai.navigation@1.1.4/Editor/Updater/Unity.AI.Navigation.Updater.asmdef" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">
@@ -740,6 +742,9 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="Unity.AI.Navigation.csproj" />
+    <ProjectReference Include="Unity.AI.Navigation.Editor.csproj" />
+    <ProjectReference Include="Unity.AI.Navigation.Editor.ConversionSystem.csproj" />
     <ProjectReference Include="UnityEditor.UI.csproj" />
     <ProjectReference Include="UnityEngine.UI.csproj" />
     <ProjectReference Include="UnityEditor.TestRunner.csproj" />

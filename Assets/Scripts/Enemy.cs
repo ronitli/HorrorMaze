@@ -17,10 +17,10 @@ public class Enemy : MonoBehaviour
     public EnemyLineOfSightChecker LineOfSightChecker;
 
     // Control variables for random movement
-    private bool isFollowingPlayer = true; // Start by following the player
-    private float randomMoveTimer = 0f;
-    private float randomMoveDuration = 5f; // Adjust this as needed
-    private Vector3 randomMoveTarget; // Target for random movement
+//    private bool isFollowingPlayer = true; // Start by following the player
+//    private float randomMoveTimer = 0f;
+//    private float randomMoveDuration = 5f; // Adjust this as needed
+//    private Vector3 randomMoveTarget; // Target for random movement
 
     // Idle movement
     public float IdleLocationRadius = 4f;

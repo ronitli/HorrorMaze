@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "uXEydoIulPT20m4Jdxj8h7vkFz75OCiBbDjCM0PJzCyfjtRtIODTIxi4QDBjYmYRJuZ8j3UJZwba/JlqLTZLfg==",
+  "dgSpecHash": "/Lik8sEeARVnZqi+M+LQdSdvNLmd3kHbutRl3mHQVtEaoLCCNGjcKfIh40GZ/2juN6vMY76s088Tm2AITVPrDQ==",
   "success": true,
-  "projectFilePath": "/home/ronen/Documents/college/VR_development/HorrorMaze/Unity.Timeline.Editor.csproj",
+  "projectFilePath": "/home/ronen/Documents/college/VR_development/HorrorMaze/Unity.EditorCoroutines.Editor.csproj",
   "expectedPackageFiles": [],
   "logs": []
 }

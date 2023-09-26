@@ -1798,7 +1798,7 @@ MonoBehaviour:
   FieldOfView: 90
   LineOfSightLayers:
     serializedVersion: 2
-    m_Bits: 65
+    m_Bits: 1
 --- !u!1 &6518580148147411945
 GameObject:
   m_ObjectHideFlags: 0

@@ -10,7 +10,7 @@ public class BlinkingLights : MonoBehaviour
 
     private GameObject[] enemies;
     
-    private bool isBlinking = false;
+//    private bool isBlinking = false;
 
     [SerializeField] private Light Light;
     

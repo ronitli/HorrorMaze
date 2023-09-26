@@ -3,20 +3,20 @@ using UnityEngine;
 
 public class Flashlight : MonoBehaviour
 {
-    private Light light;
+    private Light lightSource;
 
     public AudioSource sound;
 
     private void Awake()
     {
-        light = GetComponent<Light>();
+        lightSource = GetComponent<Light>();
     }
 
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.Mouse0))
         {
-            light.enabled = !light.enabled;
+            lightSource.enabled = !lightSource.enabled;
             sound.Play();
         }
     }

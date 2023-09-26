@@ -224,7 +224,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 12.43, y: 9.92, z: 14.14}
+  m_LocalScale: {x: 100, y: 9.92, z: 100}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 893159676}
@@ -375,6 +375,7 @@ MonoBehaviour:
   nodeSize: 1
   playerPrefab: {fileID: 4514050537910336042, guid: 60e62abf2324afdf483f06342689dc31, type: 3}
   enemyPrefab: {fileID: 3969451666641369782, guid: 0fdb1355e1101c749ad02eba859fc470, type: 3}
+  enemyCounter: 2
   Surface: {fileID: 893159677}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
