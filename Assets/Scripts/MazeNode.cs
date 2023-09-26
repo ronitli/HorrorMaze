@@ -9,4 +9,9 @@ public class MazeNode : MonoBehaviour
     {
         walls[wallToRemove].gameObject.SetActive(false);
     }
+
+    public GameObject getWall(int wall)
+    {
+        return walls[wall];
+    }
 }

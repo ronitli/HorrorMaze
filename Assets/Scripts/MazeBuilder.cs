@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using Unity.AI.Navigation;
 using UnityEngine;
 using UnityEngine.AI;
@@ -6,8 +7,10 @@ public class MazeBuilder : MonoBehaviour
 {
     [SerializeField] MazeNode nodePrefab;
     [SerializeField] MazeNode DoorNode;
+    [SerializeField] Portal portalPrefab;
     [SerializeField] Vector2Int mazeSize;
     [SerializeField] float nodeSize;
+    [SerializeField] bool debug;
     
     [SerializeField] GameObject playerPrefab;
     [SerializeField] GameObject enemyPrefab;
@@ -16,17 +19,21 @@ public class MazeBuilder : MonoBehaviour
     private Vector3[] enemySpawnPoint = new Vector3[2];
     private NavMeshTriangulation Triangulation;
 
+    private int portalAmount;
+    private Dictionary<Transform, Vector3> portalSpawnPoints;
+
     public int enemyCounter = 2;
 
     public NavMeshSurface Surface;
     private void Start()
     {
+        portalAmount = Mathf.Min(mazeSize.x, mazeSize.y);
+        portalSpawnPoints = new Dictionary<Transform, Vector3>();
         GenerateMazeInstant(mazeSize);
         Surface.BuildNavMesh();
         Triangulation = NavMesh.CalculateTriangulation();
         SpawnPlayer(mazeSize);
-        SpawnEnemy(mazeSize);
-        
+        if (!debug) SpawnEnemy(mazeSize);
 
         //StartCoroutine(GenerateMaze(mazeSize));
     }
@@ -51,7 +58,7 @@ public class MazeBuilder : MonoBehaviour
 
     private void GenerateMazeInstant(Vector2Int size)
     {
-        var doorSide = 3; //Random.Range(0, 4); // 0 for up, 1 down, 2 left, 3 right
+        var doorSide = Random.Range(0, 4); // 0 for up, 1 down, 2 left, 3 right
 
         var doorPos = new Vector2Int();
 		var yRotation = 0f;
@@ -123,6 +130,8 @@ public class MazeBuilder : MonoBehaviour
 
         // Choose starting node
         currentPath.Add(nodes[Random.Range(0, nodes.Count)]);
+
+        List<Transform> undeletedWalls = new List<Transform>();  
 
         while (completedNodes.Count < nodes.Count)
         {
@@ -209,7 +218,28 @@ public class MazeBuilder : MonoBehaviour
 
                 currentPath.RemoveAt(currentPath.Count - 1);
             }
+
+            for (int i=0;i<4;i++)
+            {
+                if (nodes[currentNodeIndex].getWall(i).activeInHierarchy)
+                {   
+                    undeletedWalls.Add(nodes[currentNodeIndex].getWall(i).transform);    
+                }
+            }
         }
+    
+        for (int i=0;i<portalAmount;i++)
+        {
+            int index = Random.Range(0, undeletedWalls.Count);
+            portalSpawnPoints.Add(undeletedWalls[index], undeletedWalls[index].transform.parent.position);
+            undeletedWalls.RemoveAt(index);
+        }
+    
+        foreach(Transform wall in portalSpawnPoints.Keys)
+        {
+            Portal portal = Instantiate(portalPrefab, wall.transform);
+        }
+    
     }
 
     /* IEnumerator GenerateMaze(Vector2Int size)
