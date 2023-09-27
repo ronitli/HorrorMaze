@@ -20,7 +20,7 @@ public class MazeBuilder : MonoBehaviour
     private NavMeshTriangulation Triangulation;
 
     private int portalAmount;
-    private Dictionary<Transform, Vector3> portalSpawnPoints;
+    private List<PortalData> portalSpawnPoints;
 
     public int enemyCounter = 2;
 
@@ -28,7 +28,7 @@ public class MazeBuilder : MonoBehaviour
     private void Start()
     {
         portalAmount = Mathf.Min(mazeSize.x, mazeSize.y);
-        portalSpawnPoints = new Dictionary<Transform, Vector3>();
+        portalSpawnPoints = new List<PortalData>();
         GenerateMazeInstant(mazeSize);
         Surface.BuildNavMesh();
         Triangulation = NavMesh.CalculateTriangulation();
@@ -90,7 +90,7 @@ public class MazeBuilder : MonoBehaviour
         var nodes = new List<MazeNode>();
         Debug.Log(doorPos + " side: " + doorSide);
         // Create nodes
-        
+        MazeDoor doorNodeMazeNode = null;
         for (var x = 0; x < size.x; x++)
         {
             for (var y = 0; y < size.y; y++)
@@ -114,7 +114,8 @@ public class MazeBuilder : MonoBehaviour
                 if (x == doorPos.x && y == doorPos.y)
                 {
                     newNode = Instantiate(DoorNode, nodePos, Quaternion.identity, transform);
-                    newNode.GetComponent<MazeDoor>().RotateAndMoveWalls(yRotation);
+                    doorNodeMazeNode = newNode.GetComponent<MazeDoor>();
+                    doorNodeMazeNode.RotateAndMoveWalls(yRotation);
                 }
                 else
                 {
@@ -221,7 +222,7 @@ public class MazeBuilder : MonoBehaviour
 
             for (int i=0;i<4;i++)
             {
-                if (nodes[currentNodeIndex].getWall(i).activeInHierarchy)
+                if (nodes[currentNodeIndex].getWall(i).activeInHierarchy && !nodes[currentNodeIndex].getWall(i).Equals(doorNodeMazeNode.getWall(2)))
                 {   
                     undeletedWalls.Add(nodes[currentNodeIndex].getWall(i).transform);    
                 }
@@ -231,15 +232,40 @@ public class MazeBuilder : MonoBehaviour
         for (int i=0;i<portalAmount;i++)
         {
             int index = Random.Range(0, undeletedWalls.Count);
-            portalSpawnPoints.Add(undeletedWalls[index], undeletedWalls[index].transform.parent.position);
+            portalSpawnPoints.Add(new PortalData(undeletedWalls[index], undeletedWalls[index].transform.parent.position));
             undeletedWalls.RemoveAt(index);
         }
     
-        foreach(Transform wall in portalSpawnPoints.Keys)
+        foreach(PortalData portalData in portalSpawnPoints)
         {
-            Portal portal = Instantiate(portalPrefab, wall.transform);
+            Vector3 pos = portalData.relatedWall.transform.position;
+            Vector3 center = getMazeNodeCenter(portalData.relatedWall.parent.gameObject);
+            Vector3 changeDir = (center-pos).normalized;
+            pos += (center-pos)*0.05f;
+            pos.y = center.y*0.9f;
+            Portal portal = Instantiate(portalPrefab, 
+            pos, 
+            Quaternion.LookRotation(changeDir, portalData.relatedWall.up),
+            portalData.relatedWall.transform.parent);
         }
     
+    }
+
+
+    private Vector3 getMazeNodeCenter(GameObject node)
+    {
+        if (node.TryGetComponent(out MazeNode m))
+        {
+            Vector3 res = Vector3.zero;
+            for (int i = 0; i < 4; i++)
+            {
+                res += m.getWall(i).transform.position;
+            }
+
+            return res / 4;
+        }
+
+        throw new System.Exception("Node is not a maze node:" + node.name);
     }
 
     /* IEnumerator GenerateMaze(Vector2Int size)

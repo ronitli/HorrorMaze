@@ -2,20 +2,6 @@
   "version": 3,
   "targets": {
     ".NETStandard,Version=v2.1": {
-      "Unity.TextMeshPro/1.0.0": {
-        "type": "project",
-        "framework": ".NETStandard,Version=v2.1",
-        "dependencies": {
-          "UnityEditor.UI": "1.0.0",
-          "UnityEngine.UI": "1.0.0"
-        },
-        "compile": {
-          "bin/placeholder/Unity.TextMeshPro.dll": {}
-        },
-        "runtime": {
-          "bin/placeholder/Unity.TextMeshPro.dll": {}
-        }
-      },
       "UnityEditor.TestRunner/1.0.0": {
         "type": "project",
         "framework": ".NETStandard,Version=v2.1",
@@ -67,11 +53,6 @@
     }
   },
   "libraries": {
-    "Unity.TextMeshPro/1.0.0": {
-      "type": "project",
-      "path": "Unity.TextMeshPro.csproj",
-      "msbuildProject": "Unity.TextMeshPro.csproj"
-    },
     "UnityEditor.TestRunner/1.0.0": {
       "type": "project",
       "path": "UnityEditor.TestRunner.csproj",
@@ -95,10 +76,7 @@
   },
   "projectFileDependencyGroups": {
     ".NETStandard,Version=v2.1": [
-      "Unity.TextMeshPro >= 1.0.0",
-      "UnityEditor.TestRunner >= 1.0.0",
       "UnityEditor.UI >= 1.0.0",
-      "UnityEngine.TestRunner >= 1.0.0",
       "UnityEngine.UI >= 1.0.0"
     ]
   },
@@ -108,9 +86,9 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/home/ronen/Documents/college/VR_development/HorrorMaze/Unity.TextMeshPro.Editor.csproj",
-      "projectName": "Unity.TextMeshPro.Editor",
-      "projectPath": "/home/ronen/Documents/college/VR_development/HorrorMaze/Unity.TextMeshPro.Editor.csproj",
+      "projectUniqueName": "/home/ronen/Documents/college/VR_development/HorrorMaze/Unity.AI.Navigation.csproj",
+      "projectName": "Unity.AI.Navigation",
+      "projectPath": "/home/ronen/Documents/college/VR_development/HorrorMaze/Unity.AI.Navigation.csproj",
       "packagesPath": "/home/ronen/.nuget/packages/",
       "outputPath": "/home/ronen/Documents/college/VR_development/HorrorMaze/obj/",
       "projectStyle": "PackageReference",
@@ -127,17 +105,8 @@
         "netstandard2.1": {
           "targetAlias": "netstandard2.1",
           "projectReferences": {
-            "/home/ronen/Documents/college/VR_development/HorrorMaze/Unity.TextMeshPro.csproj": {
-              "projectPath": "/home/ronen/Documents/college/VR_development/HorrorMaze/Unity.TextMeshPro.csproj"
-            },
-            "/home/ronen/Documents/college/VR_development/HorrorMaze/UnityEditor.TestRunner.csproj": {
-              "projectPath": "/home/ronen/Documents/college/VR_development/HorrorMaze/UnityEditor.TestRunner.csproj"
-            },
             "/home/ronen/Documents/college/VR_development/HorrorMaze/UnityEditor.UI.csproj": {
               "projectPath": "/home/ronen/Documents/college/VR_development/HorrorMaze/UnityEditor.UI.csproj"
-            },
-            "/home/ronen/Documents/college/VR_development/HorrorMaze/UnityEngine.TestRunner.csproj": {
-              "projectPath": "/home/ronen/Documents/college/VR_development/HorrorMaze/UnityEngine.TestRunner.csproj"
             },
             "/home/ronen/Documents/college/VR_development/HorrorMaze/UnityEngine.UI.csproj": {
               "projectPath": "/home/ronen/Documents/college/VR_development/HorrorMaze/UnityEngine.UI.csproj"
