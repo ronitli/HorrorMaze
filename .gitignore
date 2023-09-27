@@ -6,3 +6,4 @@ Packages
 *.obj
 *build*
 UserSettings
+obj
