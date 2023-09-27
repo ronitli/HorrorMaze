@@ -268,6 +268,16 @@ public class MazeBuilder : MonoBehaviour
         throw new System.Exception("Node is not a maze node:" + node.name);
     }
 
+    public PortalData GetPortalData(int index)
+    {
+        return portalSpawnPoints[index];
+    }
+
+    public int GetPortalDataCount()
+    {
+        return portalSpawnPoints.Count;
+    }
+
     /* IEnumerator GenerateMaze(Vector2Int size)
     {
         List<MazeNode> nodes = new List<MazeNode>();

@@ -1,6 +1,6 @@
 using UnityEngine;
 
-class PortalData {
+public class PortalData {
     public PortalData(Transform relatedWall, Vector3 spawnPoint)
     {
         this.relatedWall = relatedWall;
