@@ -20,7 +20,7 @@ public class MazeBuilder : MonoBehaviour
     private NavMeshTriangulation Triangulation;
 
     private int portalAmount;
-    private List<PortalData> portalSpawnPoints;
+    public List<PortalData> portalSpawnPoints {get; private set;}
 
     public int enemyCounter = 2;
 
@@ -247,6 +247,7 @@ public class MazeBuilder : MonoBehaviour
             pos, 
             Quaternion.LookRotation(changeDir, portalData.relatedWall.up),
             portalData.relatedWall.transform.parent);
+            portal.SetPortalData(portalData);
         }
     
     }

@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1372021824031471129}
   - component: {fileID: 7064811865259558138}
+  - component: {fileID: 4111567506129509930}
   m_Layer: 0
   m_Name: passage
   m_TagString: Untagged
@@ -45,6 +46,29 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: df0d9716c09e1acf2b1aed5e47ac8539, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!136 &4111567506129509930
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5823829723723395428}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.15
+  m_Height: 1
+  m_Direction: 1
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &7040480759221837669
 GameObject:
   m_ObjectHideFlags: 0
