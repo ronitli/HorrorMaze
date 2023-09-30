@@ -12,13 +12,13 @@ public class MainMenu : MonoBehaviour
 
     private void Start()
     {
+        play.onClick.AddListener(StartGame);
+        instructions.onClick.AddListener(ShowInstructions);
+        exit.onClick.AddListener(QuitGame);
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
         music.Play();
         DontDestroyOnLoad(music);
-        play.onClick.AddListener(StartGame);
-        instructions.onClick.AddListener(ShowInstructions);
-        exit.onClick.AddListener(QuitGame);
     }
 
     public void StartGame()
