@@ -8,4 +8,11 @@ public class PortalData {
     }
     public Transform relatedWall{get;set;}
     public Vector3 spawnPoint{get;set;}
+
+    public HudController hudController{get; private set;}
+
+    public void SetHUDController(HudController controller)
+    {
+        this.hudController = controller;
+    }
 }

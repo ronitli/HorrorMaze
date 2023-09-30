@@ -12,6 +12,7 @@ public class PortalController : MonoBehaviour
 
     public static PortalController instance{get; private set;}
 
+    private HudController hudController;
 
     private void Awake() {
         if (instance == null) {
@@ -27,7 +28,9 @@ public class PortalController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        hudController = FindAnyObjectByType<HudController>();
         portals = mazeBuilder.portalSpawnPoints;
+        portals.ForEach(p => p.SetHUDController(hudController));
     }
 
     public Vector3 GetDestenation(PortalData data)

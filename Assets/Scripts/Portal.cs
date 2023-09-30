@@ -14,6 +14,7 @@ public class Portal : MonoBehaviour
             cc.enabled = false;
             other.transform.position = spawnPoint;
             cc.enabled = true;
+            portalData.hudController.UpdateScore(portalData.hudController.score + 50);
         }
     }
 
