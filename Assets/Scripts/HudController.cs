@@ -1,6 +1,4 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using System.Diagnostics;
 using TMPro;
 using UnityEngine;
@@ -61,7 +59,7 @@ public class HudController : MonoBehaviour
 
     public int score{private set; get;} = 0;
     private int Seconds = 0;
-
+    
     private void Start()
     {
         timer = new UnityTimer();
@@ -72,6 +70,7 @@ public class HudController : MonoBehaviour
     private void Update()
     {
         timer.Update();
+        ScoreContainer.time = timer.ElapsedTime;
         timerText.SetText(
             string.Format("Time: {0:00}:{1:00}:{2:00}", 
                 timer.ElapsedTime.Hours, 
@@ -89,5 +88,6 @@ public class HudController : MonoBehaviour
     {
         scoreText.SetText("Score: " + score);
         this.score = score;
+        ScoreContainer.score = score;
     }
 }

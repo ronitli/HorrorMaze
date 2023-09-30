@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayerMovementTutorial : MonoBehaviour
 {
@@ -63,11 +64,13 @@ public class PlayerMovementTutorial : MonoBehaviour
     {
         if (other.tag == "WinArea")
         {
-            Debug.Log("win");
+            ScoreContainer.score = ScoreContainer.score * 10;
+            SceneManager.LoadScene("Win");
         }
         else if (other.tag == "Enemy")
         {
-            Debug.Log("GG");
+            ScoreContainer.enemyInEnd = true;
+            SceneManager.LoadScene("GameOver");
         }
     }
 }

@@ -8,10 +8,17 @@ public class MainMenu : MonoBehaviour
 
     public AudioSource music;
 
+    public Button play, instructions, exit;
+
     private void Start()
     {
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
         music.Play();
         DontDestroyOnLoad(music);
+        play.onClick.AddListener(StartGame);
+        instructions.onClick.AddListener(ShowInstructions);
+        exit.onClick.AddListener(QuitGame);
     }
 
     public void StartGame()
@@ -30,5 +37,11 @@ public class MainMenu : MonoBehaviour
     {
         Debug.Log("Quitting game");
         Application.Quit();
+    }
+
+    private void OnDestroy() {
+        play.onClick.RemoveAllListeners();
+        instructions.onClick.RemoveAllListeners();
+        exit.onClick.RemoveAllListeners();
     }
 }

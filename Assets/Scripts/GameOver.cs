@@ -16,6 +16,6 @@ public class GameOver : MonoBehaviour
     IEnumerator loadToMenu()
     {
         yield return new WaitForSeconds(waitTime);
-        SceneManager.LoadScene(SceneName);
+        SceneManager.LoadScene(SceneName, LoadSceneMode.Single);
     }
 }
