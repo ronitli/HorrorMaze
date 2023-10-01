@@ -27,7 +27,7 @@ public class MazeBuilder : MonoBehaviour
     public NavMeshSurface surface;
     private void Start()
     {
-        _portalAmount = Mathf.Min(mazeSize.x, mazeSize.y);
+        _portalAmount = Mathf.Min(mazeSize.x, mazeSize.y)/3;
         portalSpawnPoints = new List<PortalData>();
         GenerateMazeInstant(mazeSize);
         surface.BuildNavMesh();
@@ -239,8 +239,7 @@ public class MazeBuilder : MonoBehaviour
              }
         }
     
-        for (var i=0;i<_portalAmount
-;i++)
+        for (var i=0;i<_portalAmount;i++)
         {
             var index = Random.Range(0, undeletedWalls.Count);
             portalSpawnPoints.Add(new PortalData(undeletedWalls[index], undeletedWalls[index].transform.parent.position));

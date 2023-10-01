@@ -34,7 +34,7 @@ public class PortalController : MonoBehaviour
 
     public Vector3 GetDestenation(PortalData data)
     {
-        List<PortalData> datas = new List<PortalData>(_portals);
+        var datas = new List<PortalData>(_portals);
         datas.Remove(data);
         return datas[Random.Range(0,datas.Count)].spawnPoint;
     }
