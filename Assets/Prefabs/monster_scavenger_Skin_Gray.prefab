@@ -1067,17 +1067,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cf23fe67046523448b7f4e0f0dc5e961, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  UpdateRate: 0.1
+  updateRate: 0.1
   enemy: {fileID: 8382917057747305117}
-  LineOfSightChecker: {fileID: 8094189763407599907}
-  IdleLocationRadius: 4
-  IdleMovementMultiplier: 0.5
-  DefaultState: 1
+  lineOfSightChecker: {fileID: 8094189763407599907}
+  idleLocationRadius: 4
+  idleMovementMultiplier: 0.5
+  defaultState: 1
   footstepDistance: 30
   maxVolume: 1
   minVolume: 0.1
   maxDistance: 30
-  AttackScream: {fileID: 4909015303007156758}
+  attackScream: {fileID: 0}
 --- !u!82 &4498115838854057736
 AudioSource:
   m_ObjectHideFlags: 0
@@ -1795,10 +1795,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Collider: {fileID: 413504829796595096}
-  FieldOfView: 90
-  LineOfSightLayers:
+  fieldOfView: 180
+  lineOfSightLayers:
     serializedVersion: 2
-    m_Bits: 1
+    m_Bits: 0
 --- !u!1 &6518580148147411945
 GameObject:
   m_ObjectHideFlags: 0

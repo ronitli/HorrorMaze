@@ -27,8 +27,7 @@ public class MazeBuilder : MonoBehaviour
     public NavMeshSurface surface;
     private void Start()
     {
-        _portalAmount
- = Mathf.Min(mazeSize.x, mazeSize.y);
+        _portalAmount = Mathf.Min(mazeSize.x, mazeSize.y);
         portalSpawnPoints = new List<PortalData>();
         GenerateMazeInstant(mazeSize);
         surface.BuildNavMesh();

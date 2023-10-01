@@ -725,8 +725,7 @@ MonoBehaviour:
   - {fileID: 8553194445955640903}
   - {fileID: 435703407475229240}
   - {fileID: 5786152244652104012}
-  - {fileID: 0}
-  floor: {fileID: 3950026362503721639}
+  - {fileID: 2443460458686183841}
 --- !u!1 &2443460458686183841
 GameObject:
   m_ObjectHideFlags: 0
@@ -1473,7 +1472,6 @@ MonoBehaviour:
   - {fileID: 1290560419714054364}
   - {fileID: 2443460458686183841}
   - {fileID: 9028110415784041433}
-  floor: {fileID: 0}
 --- !u!1 &6896111320595167713
 GameObject:
   m_ObjectHideFlags: 0
@@ -1527,9 +1525,8 @@ MonoBehaviour:
   walls:
   - {fileID: 2964824238615927883}
   - {fileID: 1290560419714054364}
-  - {fileID: 0}
+  - {fileID: 2443460458686183841}
   - {fileID: 9028110415784041433}
-  floor: {fileID: 9169714164684482562}
 --- !u!1 &7194770338087337967
 GameObject:
   m_ObjectHideFlags: 0

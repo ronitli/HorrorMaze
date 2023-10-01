@@ -283,7 +283,6 @@ MonoBehaviour:
   - {fileID: 8268426488248496948}
   - {fileID: 6982133400563085534}
   - {fileID: 3655074429140000314}
-  floor: {fileID: 2017949887221261557}
 --- !u!1 &3655074429140000314
 GameObject:
   m_ObjectHideFlags: 0
@@ -906,9 +905,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxDistance: 21
   blinkInterval: 1.97
-  Light: {fileID: 1304832276317756316}
-  On: {fileID: 2100000, guid: 655005cfac1ae0041bd7abdd8fcf4d1e, type: 2}
-  Off: {fileID: 2100000, guid: f792b67aad0d8d1479e1a98813480a22, type: 2}
+  light: {fileID: 1304832276317756316}
+  on: {fileID: 2100000, guid: 655005cfac1ae0041bd7abdd8fcf4d1e, type: 2}
+  off: {fileID: 2100000, guid: f792b67aad0d8d1479e1a98813480a22, type: 2}
 --- !u!1 &8268426488248496948
 GameObject:
   m_ObjectHideFlags: 0
