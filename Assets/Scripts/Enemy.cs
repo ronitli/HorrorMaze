@@ -63,6 +63,8 @@ public class Enemy : MonoBehaviour
         
         _playerTarget = GameObject.FindGameObjectWithTag("Player");
 
+        gameObject.tag = "Enemy";
+
         OnStateChange += HandleStateChange;
 
         lineOfSightChecker.OnGainSight += HandleGainSight;

@@ -3,8 +3,8 @@ using Random = UnityEngine.Random;
 
 public class BlinkingLights : MonoBehaviour
 {
-    public float maxDistance = 10.0f; // Maximum distance at which lights should blink.
-    public float blinkInterval = 1f; // Time interval for blinking.
+    public float maxDistance; // Maximum distance at which lights should blink.
+    public float blinkInterval; // Time interval for blinking.
     private GameObject[] _enemies;
     
 //    private bool isBlinking = false;
@@ -26,14 +26,13 @@ public class BlinkingLights : MonoBehaviour
     private void Start()
     {
         _enemies = GameObject.FindGameObjectsWithTag("Enemy");
-        _timer = Random.Range(1f, 3f);
+        _timer = Random.Range(0.1f, 0.4f);
     }
 
     // Update is called once per frame
     private void Update()
     {
-        foreach (var enemy in _enemies
-)
+        foreach (var enemy in _enemies)
         {
             var distanceToPlayer = Vector3.Distance(transform.position, enemy.transform.position);
             
@@ -48,7 +47,7 @@ public class BlinkingLights : MonoBehaviour
                 {
                     light.enabled = !light.enabled;
                     _mat.material = light.enabled ? on : off;
-                    _timer = Random.Range(1f, 3f);
+                    _timer = Random.Range(0.1f, 0.4f);
                 }
             }
             else
