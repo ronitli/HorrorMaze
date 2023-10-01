@@ -2,7 +2,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
-public class InstriuctionController : MonoBehaviour
+public class InstructionController : MonoBehaviour
 {
     public Button mainMenuButton;
     // Start is called before the first frame update
@@ -11,7 +11,7 @@ public class InstriuctionController : MonoBehaviour
         mainMenuButton.onClick.AddListener(OnMainMenuClick);
     }
 
-    public void OnMainMenuClick()
+    private void OnMainMenuClick()
     {
         SceneManager.LoadScene("MainMenu");
     }

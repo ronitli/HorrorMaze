@@ -1,5 +1,3 @@
-using System;
-using System.Collections;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -7,56 +5,56 @@ public class BlinkingLights : MonoBehaviour
 {
     public float maxDistance = 10.0f; // Maximum distance at which lights should blink.
     public float blinkInterval = 1f; // Time interval for blinking.
-
-    private GameObject[] enemies;
+    private GameObject[] _enemies;
     
 //    private bool isBlinking = false;
 
-    [SerializeField] private Light Light;
+    [SerializeField] private new Light light;
     
-    public Material On;
-    public Material Off;
+    public Material on;
+    public Material off;
 
-    private float timer;
+    private float _timer;
 
-    private MeshRenderer mat;
+    private MeshRenderer _mat;
 
     private void Awake()
     {
-        mat = gameObject.GetComponent<MeshRenderer>();
+        _mat = gameObject.GetComponent<MeshRenderer>();
     }
 
     private void Start()
     {
-        enemies = GameObject.FindGameObjectsWithTag("Enemy");
-        timer = Random.Range(0.1f, 0.4f);
+        _enemies = GameObject.FindGameObjectsWithTag("Enemy");
+        _timer = Random.Range(1f, 3f);
     }
 
     // Update is called once per frame
     private void Update()
     {
-        foreach (var enemy in enemies)
+        foreach (var enemy in _enemies
+)
         {
             var distanceToPlayer = Vector3.Distance(transform.position, enemy.transform.position);
             
             // Check if the player is within the trigger zone and the lights are not already blinking.
             if (distanceToPlayer <= maxDistance)
             {
-                if (timer > 0)
+                if (_timer > 0)
                 {
-                    timer -= Time.deltaTime;
+                    _timer -= Time.deltaTime;
                 }
-                else if (timer <= 0)
+                else if (_timer <= 0)
                 {
-                    Light.enabled = !Light.enabled;
-                    mat.material = Light.enabled ? On : Off;
-                    timer = Random.Range(0.1f, 0.4f);
+                    light.enabled = !light.enabled;
+                    _mat.material = light.enabled ? on : off;
+                    _timer = Random.Range(1f, 3f);
                 }
             }
             else
             {
-                Light.enabled = true;
-                mat.material = On;
+                light.enabled = true;
+                _mat.material = on;
             }
         }
     }

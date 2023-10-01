@@ -4,18 +4,18 @@ using UnityEngine.SceneManagement;
 
 public class GameOver : MonoBehaviour
 {
-    public string SceneName;
+    public string sceneName;
     public float waitTime;
 
 
     private void Start()
     {
-        StartCoroutine(loadToMenu());
+        StartCoroutine(LoadToMenu());
     }
 
-    IEnumerator loadToMenu()
+    IEnumerator LoadToMenu()
     {
         yield return new WaitForSeconds(waitTime);
-        SceneManager.LoadScene(SceneName, LoadSceneMode.Single);
+        SceneManager.LoadScene(sceneName, LoadSceneMode.Single);
     }
 }

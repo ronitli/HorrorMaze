@@ -1,20 +1,18 @@
-using System;
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 [RequireComponent((typeof(SphereCollider)))]
 public class EnemyLineOfSightChecker : MonoBehaviour
 {
     public SphereCollider Collider;
-    public float FieldOfView = 180f;
-    public LayerMask LineOfSightLayers;
+    public float fieldOfView = 180f;
+    public LayerMask lineOfSightLayers;
     
     public delegate void GainSightEvent(GameObject player);
     public GainSightEvent OnGainSight;
     public delegate void LoseSightEvent(GameObject player);
     public LoseSightEvent OnLoseSight;
 
-    private Coroutine checkForLineOfSightCoroutine;
+    private Coroutine _checkForLineOfSightCoroutine;
 
     private void Awake()
     {
@@ -23,28 +21,26 @@ public class EnemyLineOfSightChecker : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        GameObject player;
-        if (other.tag == "Player")
+        if (other.CompareTag("Player"))
         {
-            player = other.gameObject;
+            var player = other.gameObject;
             if (!CheckLineOfSight(player))
             {
-                checkForLineOfSightCoroutine = StartCoroutine(CheckForLineOfSight(player));
+                _checkForLineOfSightCoroutine = StartCoroutine(CheckForLineOfSight(player));
             }
         }
     }
 
     private void OnTriggerExit(Collider other)
     {
-        GameObject player;
-        if (other.tag == "Player")
+        if (other.CompareTag("Player"))
         {
-            player = other.gameObject;
+            var player = other.gameObject;
             OnLoseSight?.Invoke(player);
             gameObject.GetComponent<SphereCollider>().radius = 5;
-            if (checkForLineOfSightCoroutine != null)
+            if (_checkForLineOfSightCoroutine != null)
             {
-                StopCoroutine(checkForLineOfSightCoroutine);
+                StopCoroutine(_checkForLineOfSightCoroutine);
             }
         }
     }
@@ -53,7 +49,7 @@ public class EnemyLineOfSightChecker : MonoBehaviour
     {
         var direction = player.transform.position - transform.position;
 
-        if (Vector3.Dot(transform.forward, direction) >= Mathf.Cos(FieldOfView))
+        if (Vector3.Dot(transform.forward, direction) >= Mathf.Cos(fieldOfView))
         {
             OnGainSight?.Invoke(player);
             gameObject.GetComponent<SphereCollider>().radius = 8;

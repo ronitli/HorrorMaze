@@ -904,8 +904,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 21fa7e172d9205e4981e2c4d2e844a1d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxDistance: 25
-  blinkInterval: 0.5
+  maxDistance: 21
+  blinkInterval: 1.97
   Light: {fileID: 1304832276317756316}
   On: {fileID: 2100000, guid: 655005cfac1ae0041bd7abdd8fcf4d1e, type: 2}
   Off: {fileID: 2100000, guid: f792b67aad0d8d1479e1a98813480a22, type: 2}

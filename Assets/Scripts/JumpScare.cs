@@ -1,33 +1,31 @@
-using System;
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class JumpScare : MonoBehaviour
 {
     public Animator attackAnimator;
-    private GameObject player;
+    private GameObject _player;
     public float jumpscareTime;
     public string sceneName;
 
     public GameObject camara;
 
     public AudioSource scream;
-    private bool screamed = false;
+    private bool _screamed = false;
     private void Awake()
     {
-        player = GameObject.FindGameObjectWithTag("Player");
+        _player = GameObject.FindGameObjectWithTag("Player");
     }
 
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Player"))
         {
-            player.SetActive(false); 
+            _player.SetActive(false); 
             camara.SetActive(true);
             attackAnimator.SetTrigger("jumpscare");
-            if(!screamed)
+            if(!_screamed)
                 scream.Play();
             StartCoroutine(Jumpscare());
         }

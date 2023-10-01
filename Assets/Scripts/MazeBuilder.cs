@@ -1,58 +1,57 @@
 using System.Collections.Generic;
-using System.Linq;
 using Unity.AI.Navigation;
 using UnityEngine;
 using UnityEngine.AI;
 public class MazeBuilder : MonoBehaviour
 {
     [SerializeField] MazeNode nodePrefab;
-    [SerializeField] MazeNode DoorNode;
+    [SerializeField] MazeNode doorNode;
     [SerializeField] Portal portalPrefab;
     [SerializeField] Vector2Int mazeSize;
-    [SerializeField] float nodeSize;
     [SerializeField] bool debug;
     
     [SerializeField] GameObject playerPrefab;
     [SerializeField] GameObject enemyPrefab;
 
-    private Vector3 playerSpawnPoint;
-    private Vector3[] enemySpawnPoint = new Vector3[2];
-    private NavMeshTriangulation Triangulation;
+    private Vector3 _playerSpawnPoint;
+    private Vector3[] _enemySpawnPoint = new Vector3[2];
+    private NavMeshTriangulation _triangulation;
 
-    private int portalAmount;
+    private int _portalAmount;
     public List<PortalData> portalSpawnPoints {get; private set;}
 
     public int enemyCounter = 2;
 
-    public NavMeshSurface Surface;
+    public List<Transform> undeletedWalls;
+
+    public NavMeshSurface surface;
     private void Start()
     {
-        portalAmount = Mathf.Min(mazeSize.x, mazeSize.y);
+        _portalAmount
+ = Mathf.Min(mazeSize.x, mazeSize.y);
         portalSpawnPoints = new List<PortalData>();
         GenerateMazeInstant(mazeSize);
-        Surface.BuildNavMesh();
-        Triangulation = NavMesh.CalculateTriangulation();
-        SpawnPlayer(mazeSize);
-        if (!debug) SpawnEnemy(mazeSize);
-
-        //StartCoroutine(GenerateMaze(mazeSize));
+        surface.BuildNavMesh();
+        _triangulation = NavMesh.CalculateTriangulation();
+        SpawnPlayer();
+        if (!debug) SpawnEnemy();
     }
 
-    private void SpawnPlayer(Vector2Int size)
+    private void SpawnPlayer()
     {
-        var player = Instantiate(playerPrefab, playerSpawnPoint + new Vector3(0,1f,0), Quaternion.identity, transform);
+        var player = Instantiate(playerPrefab, _playerSpawnPoint + new Vector3(0,1f,0), Quaternion.identity, transform);
         player.SetActive(true);
     }
 
-    private void SpawnEnemy(Vector2Int size)
+    private void SpawnEnemy()
     {
         for (var i = 0; i < enemyCounter; i++)
         {
-            var Enemy = Instantiate(enemyPrefab, enemySpawnPoint[i] + new Vector3(0,1f,0), Quaternion.identity, transform);
-            Enemy.SetActive(true);
-            var enemy = Enemy.GetComponent<Enemy>();
-            enemy.Triangulation = Triangulation;
-            enemy.Spawn();
+            var enemy = Instantiate(enemyPrefab, _enemySpawnPoint[i] + new Vector3(0,1f,0), Quaternion.identity, transform);
+            enemy.SetActive(true);
+            var enemy1 = enemy.GetComponent<Enemy>();
+            enemy1.Triangulation = _triangulation;
+            enemy1.Spawn();
         }
     }
 
@@ -100,20 +99,20 @@ public class MazeBuilder : MonoBehaviour
                 var nodePos = new Vector3(x * cellSize - ((size.x - 1) * cellSize / 2f), 0, y * cellSize - ((size.y - 1) * cellSize / 2f));
                 if (x == size.x / 2 && y == size.y / 2)
                 {
-                    playerSpawnPoint = nodePos;
+                    _playerSpawnPoint = nodePos;
                 }
                 
                 else if (x == size.x / 2 + 2 && y == size.y / 2 - 2)
                 {
-                    enemySpawnPoint[0] = nodePos;
+                    _enemySpawnPoint[0] = nodePos;
                 }
                 else if (x == size.x / 2 - 2 && y == size.y / 2 + 2)
                 {
-                    enemySpawnPoint[1] = nodePos;
+                    _enemySpawnPoint[1] = nodePos;
                 }
                 if (x == doorPos.x && y == doorPos.y)
                 {
-                    newNode = Instantiate(DoorNode, nodePos, Quaternion.identity, transform);
+                    newNode = Instantiate(doorNode, nodePos, Quaternion.identity, transform);
                     doorNodeMazeNode = newNode.GetComponent<MazeDoor>();
                     doorNodeMazeNode.RotateAndMoveWalls(yRotation);
                 }
@@ -132,7 +131,7 @@ public class MazeBuilder : MonoBehaviour
         // Choose starting node
         currentPath.Add(nodes[Random.Range(0, nodes.Count)]);
 
-        List<Transform> undeletedWalls = new List<Transform>();  
+        undeletedWalls = new List<Transform>();  
 
         while (completedNodes.Count < nodes.Count)
         {
@@ -220,47 +219,59 @@ public class MazeBuilder : MonoBehaviour
                 currentPath.RemoveAt(currentPath.Count - 1);
             }
 
-            for (int i=0;i<4;i++)
-            {
-                if (nodes[currentNodeIndex].getWall(i).activeInHierarchy && !nodes[currentNodeIndex].getWall(i).Equals(doorNodeMazeNode.getWall(2)))
+            // for (var i=0;i<4;i++)
+            // {
+            //     if (nodes[currentNodeIndex].GetWall(i).activeInHierarchy && !nodes[currentNodeIndex].GetWall(i).Equals(doorNodeMazeNode.GetWall(2)))
+            //     {   
+            //         undeletedWalls.Add(nodes[currentNodeIndex].GetWall(i).transform);    
+            //     }
+            // }
+        }
+
+        
+        foreach (var node in nodes)
+        {
+             for (var j = 0; j < 4 ;j++)
+             {
+                if (node.GetWall(j).activeInHierarchy && !node.GetWall(j).Equals(doorNodeMazeNode.GetWall(2)))
                 {   
-                    undeletedWalls.Add(nodes[currentNodeIndex].getWall(i).transform);    
+                    undeletedWalls.Add(node.GetWall(j).transform);    
                 }
-            }
+             }
         }
     
-        for (int i=0;i<portalAmount;i++)
+        for (var i=0;i<_portalAmount
+;i++)
         {
-            int index = Random.Range(0, undeletedWalls.Count);
+            var index = Random.Range(0, undeletedWalls.Count);
             portalSpawnPoints.Add(new PortalData(undeletedWalls[index], undeletedWalls[index].transform.parent.position));
             undeletedWalls.RemoveAt(index);
         }
     
-        foreach(PortalData portalData in portalSpawnPoints)
+        foreach(var portalData in portalSpawnPoints)
         {
-            Vector3 pos = portalData.relatedWall.transform.position;
-            Vector3 center = getMazeNodeCenter(portalData.relatedWall.parent.gameObject);
-            Vector3 changeDir = (center-pos).normalized;
+            var pos = portalData.relatedWall.transform.position;
+            var center = GetMazeNodeCenter(portalData.relatedWall.parent.gameObject);
+            var changeDir = (center-pos).normalized;
             pos += (center-pos)*0.05f;
             pos.y = center.y*0.9f;
-            Portal portal = Instantiate(portalPrefab, 
-            pos, 
-            Quaternion.LookRotation(changeDir, portalData.relatedWall.up),
-            portalData.relatedWall.transform.parent);
+            var portal = Instantiate(portalPrefab, 
+                pos, 
+                Quaternion.LookRotation(changeDir, portalData.relatedWall.up),
+                portalData.relatedWall.transform.parent);
             portal.SetPortalData(portalData);
         }
-    
     }
 
 
-    private Vector3 getMazeNodeCenter(GameObject node)
+    private Vector3 GetMazeNodeCenter(GameObject node)
     {
         if (node.TryGetComponent(out MazeNode m))
         {
-            Vector3 res = Vector3.zero;
+            var res = Vector3.zero;
             for (int i = 0; i < 4; i++)
             {
-                res += m.getWall(i).transform.position;
+                res += m.GetWall(i).transform.position;
             }
 
             return res / 4;
@@ -278,120 +289,4 @@ public class MazeBuilder : MonoBehaviour
     {
         return portalSpawnPoints.Count;
     }
-
-    /* IEnumerator GenerateMaze(Vector2Int size)
-    {
-        List<MazeNode> nodes = new List<MazeNode>();
-
-        // Create nodes
-        for (int x = 0; x < size.x; x++)
-        {
-            for (int y = 0; y < size.y; y++)
-            {
-                Vector3 nodePos = new Vector3(x - (size.x / 2f), 0, y - (size.y / 2f));
-                MazeNode newNode = Instantiate(nodePrefab, nodePos, Quaternion.identity, transform);
-                nodes.Add(newNode);
-
-                yield return null;
-            }
-        }
-
-        List<MazeNode> currentPath = new List<MazeNode>();
-        List<MazeNode> completedNodes = new List<MazeNode>();
-
-        // Choose starting node
-        currentPath.Add(nodes[Random.Range(0, nodes.Count)]);
-        currentPath[0].SetState(NodeState.Current);
-
-        while (completedNodes.Count < nodes.Count)
-        {
-            // Check nodes next to the current node
-            List<int> possibleNextNodes = new List<int>();
-            List<int> possibleDirections = new List<int>();
-
-            int currentNodeIndex = nodes.IndexOf(currentPath[currentPath.Count - 1]);
-            int currentNodeX = currentNodeIndex / size.y;
-            int currentNodeY = currentNodeIndex % size.y;
-
-            if (currentNodeX < size.x - 1)
-            {
-                // Check node to the right of the current node
-                if (!completedNodes.Contains(nodes[currentNodeIndex + size.y]) && 
-                    !currentPath.Contains(nodes[currentNodeIndex + size.y]))
-                {
-                    possibleDirections.Add(1);
-                    possibleNextNodes.Add(currentNodeIndex + size.y);
-                }
-            }
-            if (currentNodeX > 0)
-            {
-                // Check node to the left of the current node
-                if (!completedNodes.Contains(nodes[currentNodeIndex - size.y]) &&
-                    !currentPath.Contains(nodes[currentNodeIndex - size.y]))
-                {
-                    possibleDirections.Add(2);
-                    possibleNextNodes.Add(currentNodeIndex - size.y);
-                }
-            }
-            if (currentNodeY < size.y - 1)
-            {
-                // Check node above the current node
-                if (!completedNodes.Contains(nodes[currentNodeIndex + 1]) &&
-                    !currentPath.Contains(nodes[currentNodeIndex + 1]))
-                {
-                    possibleDirections.Add(3);
-                    possibleNextNodes.Add(currentNodeIndex + 1);
-                }
-            }
-            if (currentNodeY > 0)
-            {
-                // Check node below the current node
-                if (!completedNodes.Contains(nodes[currentNodeIndex - 1]) &&
-                    !currentPath.Contains(nodes[currentNodeIndex - 1]))
-                {
-                    possibleDirections.Add(4);
-                    possibleNextNodes.Add(currentNodeIndex - 1);
-                }
-            }
-
-            // Choose next node
-            if (possibleDirections.Count > 0)
-            {
-                int chosenDirection = Random.Range(0, possibleDirections.Count);
-                MazeNode chosenNode = nodes[possibleNextNodes[chosenDirection]];
-
-                switch (possibleDirections[chosenDirection])
-                {
-                    case 1:
-                        chosenNode.RemoveWall(1);
-                        currentPath[currentPath.Count - 1].RemoveWall(0);
-                        break;
-                    case 2:
-                        chosenNode.RemoveWall(0);
-                        currentPath[currentPath.Count - 1].RemoveWall(1);
-                        break;
-                    case 3:
-                        chosenNode.RemoveWall(3);
-                        currentPath[currentPath.Count - 1].RemoveWall(2);
-                        break;
-                    case 4:
-                        chosenNode.RemoveWall(2);
-                        currentPath[currentPath.Count - 1].RemoveWall(3);
-                        break;
-                }
-
-                currentPath.Add(chosenNode);
-                chosenNode.SetState(NodeState.Current);
-            }
-            else
-            {
-                completedNodes.Add(currentPath[currentPath.Count - 1]);
-
-                currentPath[currentPath.Count - 1].SetState(NodeState.Completed);
-                currentPath.RemoveAt(currentPath.Count - 1);
-            }
-
-            yield return new WaitForSeconds(0.05f);
-        }
-    } */
 }

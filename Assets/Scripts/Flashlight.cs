@@ -1,22 +1,21 @@
-using System;
 using UnityEngine;
 
 public class Flashlight : MonoBehaviour
 {
-    private Light lightSource;
+    private Light _lightSource;
 
     public AudioSource sound;
 
     private void Awake()
     {
-        lightSource = GetComponent<Light>();
+        _lightSource = GetComponent<Light>();
     }
 
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.Mouse0))
         {
-            lightSource.enabled = !lightSource.enabled;
+            _lightSource.enabled = !_lightSource.enabled;
             sound.Play();
         }
     }

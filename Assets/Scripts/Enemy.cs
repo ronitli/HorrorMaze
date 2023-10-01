@@ -1,6 +1,4 @@
-using System;
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 using Random = UnityEngine.Random;
@@ -9,12 +7,12 @@ using Random = UnityEngine.Random;
 public class Enemy : MonoBehaviour
 {
     
-    public float UpdateRate = 0.1f;
+    public float updateRate = 0.1f;
     public NavMeshAgent enemy;
-    private GameObject playerTarget;
+    private GameObject _playerTarget;
     public NavMeshTriangulation Triangulation;
 
-    public EnemyLineOfSightChecker LineOfSightChecker;
+    public EnemyLineOfSightChecker lineOfSightChecker;
 
     // Control variables for random movement
 //    private bool isFollowingPlayer = true; // Start by following the player
@@ -23,26 +21,26 @@ public class Enemy : MonoBehaviour
 //    private Vector3 randomMoveTarget; // Target for random movement
 
     // Idle movement
-    public float IdleLocationRadius = 4f;
-    public float IdleMovementMultiplier = 0.5f;
+    public float idleLocationRadius = 4f;
+    public float idleMovementMultiplier = 0.5f;
 
     
-    public EnemyState DefaultState = EnemyState.Idle;
+    public EnemyState defaultState = EnemyState.Idle;
     private EnemyState _state;
 
-    private bool screamed = false;
+    private bool _screamed;
 
 
     [SerializeField] private float footstepDistance = 50f;
-    private AudioSource steps;
+    private AudioSource _steps;
     public float maxVolume = 1f; // Maximum volume when close to the player.
     public float minVolume = 0.1f; // Minimum volume when far from the player.
     public float maxDistance = 50f; // Maximum distance at which footsteps are heard.
 
-    public AudioSource AttackScream;
+    public AudioSource attackScream;
 
-    private Coroutine followCoroutine;
-    public EnemyState State
+    private Coroutine _followCoroutine;
+    public EnemyState state
     {
         get
         {
@@ -50,30 +48,30 @@ public class Enemy : MonoBehaviour
         }
         set
         {
-            onStateChange?.Invoke(_state,value);
+            OnStateChange?.Invoke(_state,value);
             _state = value;
         }
     }
 
     public delegate void StateChangeEvent(EnemyState oldState, EnemyState newState);
 
-    public StateChangeEvent onStateChange;
+    public StateChangeEvent OnStateChange;
     void Awake()
     {
-        steps = GetComponent<AudioSource>();
+        _steps = GetComponent<AudioSource>();
         enemy = GetComponent<NavMeshAgent>();
         
-        playerTarget = GameObject.FindGameObjectWithTag("Player");
+        _playerTarget = GameObject.FindGameObjectWithTag("Player");
 
-        onStateChange += HandleStateChange;
+        OnStateChange += HandleStateChange;
 
-        LineOfSightChecker.OnGainSight += HandleGainSight;
-        LineOfSightChecker.OnLoseSight += HandleLoseSight;
+        lineOfSightChecker.OnGainSight += HandleGainSight;
+        lineOfSightChecker.OnLoseSight += HandleLoseSight;
     }
 
     private void Update()
     {
-        var distanceToPlayer = Vector3.Distance(transform.position, playerTarget.transform.position);
+        var distanceToPlayer = Vector3.Distance(transform.position, _playerTarget.transform.position);
 
         if (distanceToPlayer == 0)
             distanceToPlayer += 0.01f;
@@ -85,39 +83,32 @@ public class Enemy : MonoBehaviour
 
 
         // Set the volume.
-        steps.volume = volume;
+        _steps.volume = volume;
 
         // Check if the enemy is close enough to the player to play footsteps.
-        if (distanceToPlayer <= footstepDistance)
-        {
-            steps.enabled = true;
-        }
-        else
-        {
-            steps.enabled = false;
-        }
+        _steps.enabled = distanceToPlayer <= footstepDistance;
     }
 
     private void HandleGainSight(GameObject player)
     {
-        State = EnemyState.Chase;
+        state = EnemyState.Chase;
     }
     
     private void HandleLoseSight(GameObject player)
     {
-        State = DefaultState;
+        state = defaultState;
     }
 
 
     private void OnDisable()
     {
-        _state = DefaultState;
+        _state = defaultState;
     }
 
 
     public void Spawn()
     {
-        onStateChange?.Invoke(EnemyState.Spawn, DefaultState);
+        OnStateChange?.Invoke(EnemyState.Spawn, defaultState);
     }
     /*
     void Update()
@@ -125,7 +116,7 @@ public class Enemy : MonoBehaviour
         if (isFollowingPlayer)
         {
             // Follow the player
-            enemy.SetDestination(playerTarget.transform.position);
+            enemy.SetDestination(_playerTarget.transform.position);
 
             // Check if it's time to switch to random movement
             randomMoveTimer += Time.deltaTime;
@@ -174,24 +165,24 @@ public class Enemy : MonoBehaviour
     {
         if (oldState != newState)
         {
-            if (followCoroutine != null)
+            if (_followCoroutine != null)
             {
-                StopCoroutine(followCoroutine);
+                StopCoroutine(_followCoroutine);
             }
 
             if (oldState == EnemyState.Idle)
             {
-                enemy.speed /= IdleMovementMultiplier;
+                enemy.speed /= idleMovementMultiplier;
             }
 
             switch (newState)
             {
                 case EnemyState.Idle:
-                    screamed = false;
-                    followCoroutine = StartCoroutine(DoIdleMotion());
+                    _screamed = false;
+                    _followCoroutine = StartCoroutine(DoIdleMotion());
                     break;
                 case EnemyState.Chase:
-                    followCoroutine = StartCoroutine(FollowTarget());
+                    _followCoroutine = StartCoroutine(FollowTarget());
                     break;
             }
         }
@@ -199,9 +190,10 @@ public class Enemy : MonoBehaviour
 
     private IEnumerator DoIdleMotion()
     {
-        var wait = new WaitForSeconds(UpdateRate);
+        var wait = new WaitForSeconds(updateRate
+);
 
-        enemy.speed *= IdleMovementMultiplier;
+        enemy.speed *= idleMovementMultiplier;
 
         while (true)
         {
@@ -212,7 +204,7 @@ public class Enemy : MonoBehaviour
             
             else if (enemy.remainingDistance <= enemy.stoppingDistance)
             {
-                var point = Random.insideUnitCircle * IdleLocationRadius;
+                var point = Random.insideUnitCircle * idleLocationRadius;
                 NavMeshHit hit;
 
                 if (NavMesh.SamplePosition(enemy.transform.position + new Vector3(point.x, 0, point.y), out hit, 2f, enemy.areaMask))
@@ -227,19 +219,20 @@ public class Enemy : MonoBehaviour
 
     private IEnumerator FollowTarget()
     {
-        var wait = new WaitForSeconds(UpdateRate);
+        var wait = new WaitForSeconds(updateRate
+);
 
         while (gameObject.activeSelf)
         {
             if (enemy.enabled)
             {
-                enemy.SetDestination(playerTarget.transform.position);
+                enemy.SetDestination(_playerTarget.transform.position);
 
-                if (!screamed)
+                if (!_screamed)
                 {
-                    AttackScream.Play();
+                    attackScream.Play();
 
-                    screamed = true;
+                    _screamed = true;
                 }
             }
 

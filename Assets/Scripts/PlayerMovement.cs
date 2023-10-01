@@ -1,6 +1,3 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -10,20 +7,20 @@ public class PlayerMovementTutorial : MonoBehaviour
     public float sensitivity = 2.0f;
     public float upDownRange = 90.0f;
 
-    private CharacterController characterController;
-    private Camera playerCamera;
-    private float rotationX;
-    private AudioSource steps;
+    private CharacterController _characterController;
+    private Camera _playerCamera;
+    private float _rotationX;
+    private AudioSource _steps;
 
     private void Awake()
     {
-        steps = GetComponent<AudioSource>();
+        _steps = GetComponent<AudioSource>();
     }
 
     void Start()
     {
-        characterController = GetComponent<CharacterController>();
-        playerCamera = GetComponentInChildren<Camera>();
+        _characterController = GetComponent<CharacterController>();
+        _playerCamera = GetComponentInChildren<Camera>();
         Cursor.lockState = CursorLockMode.Locked; // Lock cursor to center of the screen
         Cursor.visible = false; // Hide cursor
     }
@@ -36,14 +33,14 @@ public class PlayerMovementTutorial : MonoBehaviour
 
         if (horizontalInput != 0 || verticalInput != 0)
         {
-            steps.enabled = true;
+            _steps.enabled = true;
         }
         else
         {
-            steps.enabled = false;
+            _steps.enabled = false;
         }
         var moveDirection = transform.TransformDirection(new Vector3(horizontalInput, 0, verticalInput));
-        characterController.Move(moveDirection * moveSpeed * Time.deltaTime);
+        _characterController.Move(moveDirection * moveSpeed * Time.deltaTime);
 
         // Player rotation (left/right)
         var mouseX = Input.GetAxis("Mouse X") * sensitivity;
@@ -53,24 +50,19 @@ public class PlayerMovementTutorial : MonoBehaviour
 
         // Camera rotation (up/down)
         var mouseY = Input.GetAxis("Mouse Y") * sensitivity;
-        rotationX -= mouseY;
-        rotationX = Mathf.Clamp(rotationX, -upDownRange, upDownRange);
-        var cameraRotation = playerCamera.transform.localRotation.eulerAngles;
-        cameraRotation.x = rotationX;
-        playerCamera.transform.localRotation = Quaternion.Euler(cameraRotation);
+        _rotationX -= mouseY;
+        _rotationX = Mathf.Clamp(_rotationX, -upDownRange, upDownRange);
+        var cameraRotation = _playerCamera.transform.localRotation.eulerAngles;
+        cameraRotation.x = _rotationX;
+        _playerCamera.transform.localRotation = Quaternion.Euler(cameraRotation);
     }
     
     private void OnTriggerEnter(Collider other)
     {
-        if (other.tag == "WinArea")
+        if (other.CompareTag("WinArea"))
         {
             ScoreContainer.score = ScoreContainer.score * 10;
             SceneManager.LoadScene("Win");
-        }
-        else if (other.tag == "Enemy")
-        {
-            ScoreContainer.enemyInEnd = true;
-            SceneManager.LoadScene("GameOver");
         }
     }
 }

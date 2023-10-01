@@ -6,88 +6,88 @@ using UnityEngine;
 
 public class UnityTimer
 {
-    private Stopwatch stopwatch;
-    private float elapsedTime;
+    private Stopwatch _stopwatch;
+    private float _elapsedTime;
 
     public UnityTimer()
     {
-        stopwatch = new Stopwatch();
-        elapsedTime = 0f;
+        _stopwatch = new Stopwatch();
+        _elapsedTime = 0f;
     }
 
     public void Start()
     {
-        stopwatch.Start();
+        _stopwatch.Start();
     }
 
     public void Stop()
     {
-        stopwatch.Stop();
+        _stopwatch.Stop();
     }
 
     public void Reset()
     {
-        stopwatch.Reset();
-        elapsedTime = 0f;
+        _stopwatch.Reset();
+        _elapsedTime = 0f;
     }
 
     public void Update()
     {
-        if (stopwatch.IsRunning)
+        if (_stopwatch.IsRunning)
         {
-            elapsedTime += Time.deltaTime;
+            _elapsedTime += Time.deltaTime;
         }
     }
 
-    public TimeSpan ElapsedTime
+    public TimeSpan elapsedTime
     {
-        get { return stopwatch.Elapsed; }
+        get { return _stopwatch.Elapsed; }
     }
 
-    public float ElapsedTimeSeconds
+    public float elapsedTimeSeconds
     {
-        get { return elapsedTime; }
+        get { return _elapsedTime; }
     }
 }
 
 
 public class HudController : MonoBehaviour
 {
-    private UnityTimer timer;
+    private UnityTimer _timer;
     [SerializeField] private TextMeshProUGUI timerText;
     [SerializeField] private TextMeshProUGUI scoreText; 
 
-    public int score{private set; get;} = 0;
-    private int Seconds = 0;
+    public int score{private set; get;}
+    private int _seconds;
     
     private void Start()
     {
-        timer = new UnityTimer();
-        timer.Start();
+        _timer = new UnityTimer();
+        _timer.Start();
         scoreText.SetText("Score: 0");
     }
 
     private void Update()
     {
-        timer.Update();
-        ScoreContainer.time = timer.ElapsedTime;
+        _timer.Update();
+        ScoreContainer.time = _timer.elapsedTime;
         timerText.SetText(
             string.Format("Time: {0:00}:{1:00}:{2:00}", 
-                timer.ElapsedTime.Hours, 
-                timer.ElapsedTime.Minutes, 
-                timer.ElapsedTime.Seconds
+                _timer.elapsedTime.Hours, 
+                _timer.elapsedTime.Minutes, 
+                _timer.elapsedTime.Seconds
                 )
             );
-        if (Seconds != timer.ElapsedTime.Seconds){
+        if (_seconds != _timer.elapsedTime.Seconds){
             UpdateScore(score +1);
         }
-        Seconds = timer.ElapsedTime.Seconds;
+        _seconds = _timer.elapsedTime.Seconds;
     }
 
-    public void UpdateScore(int score)
+    public void UpdateScore(int amount)
     {
-        scoreText.SetText("Score: " + score);
-        this.score = score;
-        ScoreContainer.score = score;
+        scoreText.SetText("Score: " + amount);
+        this.score = amount;
+        ScoreContainer.score = amount;
     }
 }

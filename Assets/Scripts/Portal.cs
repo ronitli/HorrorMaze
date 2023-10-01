@@ -1,25 +1,22 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Portal : MonoBehaviour
 {
-    private PortalData portalData; 
+    private PortalData _portalData; 
 
     private void OnTriggerEnter(Collider other) {
         if (other.gameObject.CompareTag("Player")){
-            Vector3 spawnPoint = PortalController.instance.GetDestenation(portalData);
-            CharacterController cc = other.GetComponent<CharacterController>();
+            var spawnPoint = PortalController.instance.GetDestenation(_portalData);
+            var cc = other.GetComponent<CharacterController>();
             cc.enabled = false;
             other.transform.position = spawnPoint;
             cc.enabled = true;
-            portalData.hudController.UpdateScore(portalData.hudController.score + 50);
+            _portalData.hudController.UpdateScore(_portalData.hudController.score + 50);
         }
     }
 
     public void SetPortalData(PortalData data)
     {
-        portalData = data;
+        _portalData = data;
     }
 }

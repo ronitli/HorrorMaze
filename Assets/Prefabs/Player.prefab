@@ -44,8 +44,8 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 818ceeca65489e14ab6864f21ac80fd5, type: 3}
   m_PlayOnAwake: 0
-  m_Volume: 0.28
-  m_Pitch: 1.62
+  m_Volume: 0.7
+  m_Pitch: 1
   Loop: 0
   Mute: 0
   Spatialize: 0
@@ -533,8 +533,8 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 02dc709a1e386674e8d05d3c04baa6f7, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: 0.14
-  m_Pitch: 1
+  m_Volume: 0.03
+  m_Pitch: 0.1
   Loop: 1
   Mute: 0
   Spatialize: 0
@@ -709,7 +709,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 38.4
+  m_fontSize: 23.25
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -843,7 +843,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 38.4
+  m_fontSize: 23.25
   m_fontSizeBase: 0
   m_fontWeight: 400
   m_enableAutoSizing: 1
